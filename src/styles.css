@@ -1,0 +1,222 @@
+@import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@900&family=Pinyon+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ─── Design Tokens ─────────────────────────────────── */
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 16px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Portfolio brand tokens */
+  --color-indigo: var(--indigo);
+  --color-cyan: var(--cyan);
+  --color-surface: var(--surface);
+}
+
+:root {
+  --radius: 0;
+
+  /* ── Core palette ──
+     Cyber/Brutalist: Pure Black, stark White, piercing Cyan.
+  */
+  --background:         oklch(0 0 0);           /* pure black */
+  --foreground:         oklch(1 0 0);           /* pure white */
+  --card:               oklch(0.05 0 0);        /* very dark grey */
+  --card-foreground:    oklch(1 0 0);
+  --popover:            oklch(0.05 0 0);
+  --popover-foreground: oklch(1 0 0);
+  --primary:            oklch(0.85 0.15 210);   /* electric cyan #7c3aed */
+  --primary-foreground: oklch(0 0 0);
+  --secondary:          oklch(0.15 0 0);        /* dark grey */
+  --secondary-foreground: oklch(1 0 0);
+  --muted:              oklch(0.1 0 0);
+  --muted-foreground:   oklch(0.6 0 0);
+  --accent:             oklch(0.85 0.15 210);
+  --accent-foreground:  oklch(0 0 0);
+  --destructive:        oklch(0.6 0.2 20);
+  --border:             oklch(0.2 0 0);
+  --input:              oklch(0.2 0 0);
+  --ring:               oklch(0.85 0.15 210);
+
+  /* Brand hex refs */
+  --cyan:    #7c3aed;
+  --surface: rgba(255, 255, 255, 0.05);
+}
+
+/* ─── Base ─────────────────────────────────────────── */
+@layer base {
+  * {
+    border-color: var(--color-border);
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: rgba(124, 58, 237, 0.3);
+    color: #fff;
+  }
+
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(124, 58, 237, 0.5);
+    border-radius: 0px;
+  }
+}
+
+/* ─── Utility classes ───────────────────────────────── */
+
+/* Glass surfaces */
+@utility glass {
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.09);
+}
+
+@utility glass-strong {
+  backdrop-filter: blur(24px) saturate(1.6);
+  -webkit-backdrop-filter: blur(24px) saturate(1.6);
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+/* Monospace */
+@utility font-mono-brand {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+}
+
+/* ── Custom Local Fonts ── */
+@font-face {
+  font-family: 'XB Niloofar';
+  src: url('/Architype Van Der Leck W90.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Above The Beyond';
+  src: url('/Above the Beyond Script.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Brand fonts */
+@utility font-niloofar {
+  font-family: "XB Niloofar", serif;
+}
+
+@utility font-above-beyond {
+  font-family: "Above The Beyond", cursive;
+}
+
+/* Glow helpers */
+@utility glow-cyan {
+  box-shadow:
+    0 0 20px rgba(124,58,237,0.2),
+    0 0 60px rgba(124,58,237,0.05);
+}
+
+@utility text-glow-cyan {
+  text-shadow: 0 0 10px rgba(124,58,237,0.5);
+}
+
+/* Nav indicator underline */
+@utility nav-link {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -3px;
+    width: 0;
+    height: 1px;
+    background: var(--cyan);
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                left  0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  &:hover::after,
+  &[data-active="true"]::after {
+    width: 100%;
+    left: 0;
+  }
+}
+
+/* Gradient text */
+@utility gradient-text {
+  background: linear-gradient(135deg, #fff 0%, #888 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Ambient blobs — Cyber style */
+@utility ambient-blob {
+  position: absolute;
+  filter: blur(100px);
+  pointer-events: none;
+  opacity: 0.15;
+}
+
+/* Kinetic Grid Background */
+@utility kinetic-grid {
+  position: absolute;
+  inset: 0;
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%);
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%);
+}
+
+/* Code highlight colours */
+@utility code-keyword  { color: #7c6bff; }
+@utility code-string   { color: #34d399; }
+@utility code-comment  { color: rgba(255,255,255,0.35); font-style: italic; }
+@utility code-fn       { color: #60a5fa; }
+@utility code-number   { color: #f97316; }

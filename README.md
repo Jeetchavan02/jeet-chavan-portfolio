@@ -10,7 +10,6 @@
 [![Three.js](https://img.shields.io/badge/Three.js-0.185-black?style=flat-square&logo=threedotjs)](https://threejs.org/)
 [![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4-38bdf8?style=flat-square&logo=tailwindcss)](https://tailwindcss.com)
 [![Framer Motion](https://img.shields.io/badge/Framer_Motion-13-black?style=flat-square&logo=framer)](https://www.framer.com/motion/)
-[![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)](LICENSE)
 
 ---
 
@@ -163,11 +162,6 @@ While this is a personal portfolio, constructive feedback and code improvements 
 
 ---
 
-## 📄 License
-
-This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
-
----
 
 <div align="center">
 

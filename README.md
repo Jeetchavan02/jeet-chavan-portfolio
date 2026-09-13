@@ -26,8 +26,6 @@
 - [📁 Project Structure](#-project-structure)
 - [🚀 Getting Started](#-getting-started)
 - [🎨 Design & Aesthetics](#-design--aesthetics)
-- [🤝 Contributing](#-contributing)
-- [📄 License](#-license)
 
 ---
 
@@ -161,8 +159,6 @@ While this is a personal portfolio, constructive feedback and code improvements 
 5. Open a **Pull Request**
 
 ---
-
-
 <div align="center">
 
 **Designed & Engineered by Jeet Chavan**

@@ -10,58 +10,7 @@ const NAV_LINKS = [
   { label: "Contact",  href: "#contact" },
 ];
 
-function CopyEmailBtn() {
-  const [copied, setCopied] = useState(false);
 
-  const copy = () => {
-    navigator.clipboard.writeText("jeetnchavan02@gmail.com").then(() => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    });
-  };
-
-  const { theme } = useTheme();
-  const isDark = theme === "dark";
-
-  return (
-    <button
-      onClick={copy}
-      aria-label="Copy email address"
-      className={`relative flex items-center gap-2 rounded-full px-4 py-2 text-xs font-medium border transition-all duration-200 ${isDark ? "text-white bg-transparent border-white/20 hover:bg-white/5" : "text-[#1d1d1f] bg-transparent border-[#1d1d1f]/20 hover:bg-[#1d1d1f]/5"}`}
-    >
-      <AnimatePresence mode="wait" initial={false}>
-        {copied ? (
-          <motion.span
-            key="copied"
-            initial={{ opacity: 0, y: -6 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 6 }}
-            className="flex items-center gap-1.5"
-          >
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-              <polyline points="20 6 9 17 4 12" />
-            </svg>
-            Copied!
-          </motion.span>
-        ) : (
-          <motion.span
-            key="email"
-            initial={{ opacity: 0, y: -6 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 6 }}
-            className="flex items-center gap-1.5"
-          >
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
-              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
-            </svg>
-            Copy Email
-          </motion.span>
-        )}
-      </AnimatePresence>
-    </button>
-  );
-}
 
 function ThemeToggle() {
   const { theme, toggleTheme } = useTheme();
@@ -185,7 +134,6 @@ export function Navbar() {
 
         {/* CTA */}
         <div className="hidden md:flex items-center gap-3">
-          <CopyEmailBtn />
           <ThemeToggle />
         </div>
 
@@ -243,9 +191,7 @@ export function Navbar() {
                 </li>
               ))}
             </ul>
-            <div className="mt-5">
-              <CopyEmailBtn />
-            </div>
+
           </motion.div>
         )}
       </AnimatePresence>

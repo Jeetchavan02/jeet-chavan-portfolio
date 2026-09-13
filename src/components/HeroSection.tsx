@@ -144,6 +144,37 @@ function StaggeredHeading({ text, className, style, play }: { text: string, clas
   );
 }
 
+function smoothScrollTo(id: string) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  
+  // Disable CSS smooth scroll temporarily so the jump is truly instant
+  document.documentElement.style.scrollBehavior = 'auto';
+  
+  // Jump instantly to the element
+  el.scrollIntoView({ behavior: 'auto' });
+  
+  // Create an interval to lock onto the element for the next 1.5 seconds 
+  // to combat any layout shifts from IntersectionObservers
+  let ticks = 0;
+  const interval = setInterval(() => {
+    const target = document.getElementById(id);
+    if (target) {
+      const rect = target.getBoundingClientRect();
+      // If we are more than 5px off, adjust instantly
+      if (Math.abs(rect.top) > 5) {
+        window.scrollBy(0, rect.top);
+      }
+    }
+    ticks++;
+    if (ticks > 15) {
+      clearInterval(interval);
+      // Restore CSS smooth scroll
+      document.documentElement.style.scrollBehavior = '';
+    }
+  }, 100);
+}
+
 export function HeroSection() {
   const [isLoaded, setIsLoaded] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -256,11 +287,12 @@ export function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.4, duration: 0.6, ease: "easeOut" }}
               style={{ marginTop: "clamp(28px, 3.5vw, 48px)" }}
+              className="w-fit"
             >
               <p className={`font-mono text-xs sm:text-sm tracking-[0.22em] uppercase transition-colors duration-700 ${isDark ? "text-white/50" : "text-[#707070]"}`}>
                 Creative Developer · UI/UX Designer
               </p>
-              <div className={`h-px w-36 mt-3 mb-0 transition-colors duration-700 ${isDark ? "bg-[#7c3aed]/40" : "bg-[#707070]/20"}`} />
+              <div className={`h-px w-full mt-3 mb-0 transition-colors duration-700 ${isDark ? "bg-[#7c3aed]/40" : "bg-[#707070]/20"}`} />
             </motion.div>
           )}
 
@@ -274,24 +306,25 @@ export function HeroSection() {
               style={{ marginTop: "clamp(20px, 2.5vw, 36px)" }}
             >
               <SpecularButton
-                onClick={() => document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' })}
-                className="text-xs font-bold tracking-widest uppercase"
-                baseColor={isDark ? "#1f1f1f" : "#e1effe"}
-                lineColor={isDark ? "#7c3aed" : "#93c5fd"}
-                textColor={isDark ? "#ffffff" : "#1d5ed8"}
-                tintOpacity={isDark ? 0.1 : 0.05}
-                tint={isDark ? "#7c3aed" : "#1d5ed8"}
+                onClick={() => smoothScrollTo('projects')}
+                className="text-xs font-bold tracking-widest uppercase shadow-xl"
+                baseColor={isDark ? "#ffffff" : "#1d1d1f"}
+                lineColor={isDark ? "#a1a1aa" : "#52525b"}
+                textColor={isDark ? "#1d1d1f" : "#ffffff"}
+                tint={isDark ? "#ffffff" : "#1d1d1f"}
+                tintOpacity={1}
                 size="md"
               >
                 Projects
               </SpecularButton>
               <SpecularButton
-                onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
-                className="text-xs font-bold tracking-widest uppercase"
-                baseColor={isDark ? "#1f1f1f" : "#e8e8ed"}
-                lineColor={isDark ? "#ffffff" : "#d1d1d6"}
-                textColor={isDark ? "#ffffff" : "#1d1d1f"}
-                tintOpacity={0}
+                onClick={() => smoothScrollTo('contact')}
+                className="text-xs font-bold tracking-widest uppercase shadow-xl"
+                baseColor={isDark ? "#ffffff" : "#1d1d1f"}
+                lineColor={isDark ? "#a1a1aa" : "#52525b"}
+                textColor={isDark ? "#1d1d1f" : "#ffffff"}
+                tint={isDark ? "#ffffff" : "#1d1d1f"}
+                tintOpacity={1}
                 size="md"
               >
                 Contact me

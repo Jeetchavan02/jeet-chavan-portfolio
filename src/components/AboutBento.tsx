@@ -25,11 +25,11 @@ function BioCard() {
           <span className="font-mono-brand text-xs text-white/50 tracking-widest uppercase">Mumbai, IN 📍</span>
         </div>
         <h3 className="text-3xl lg:text-4xl font-bold text-white leading-tight">
-          A creative developer bridging the gap between <span className="text-[#7c6bff]">design</span> & <span className="text-[#34d399]">engineering</span>.
+          A Computer Engineering student focused on building <span className="text-[#7c6bff]">practical</span> <span className="text-[#34d399]">solutions</span>.
         </h3>
       </div>
       <p className="text-sm lg:text-base text-white/60 leading-relaxed mt-6">
-        I specialize in crafting high-performance, visually stunning web experiences. My approach combines rigorous engineering principles with an editorial design sensibility.
+        I am a student at Fr. CRCE with hands-on experience in full-stack development, student leadership, and event operations. I focus on building practical solutions from civic tech platforms to AI powered web applications.
       </p>
     </div>
   );
@@ -39,9 +39,9 @@ function StackCard() {
   const skills = [
     { label: "React", color: "#61DAFB" },
     { label: "TypeScript", color: "#3178C6" },
-    { label: "Three.js", color: "#ffffff" },
-    { label: "Tailwind", color: "#38B2AC" },
-    { label: "Next.js", color: "#ffffff" },
+    { label: "Node.js", color: "#339933" },
+    { label: "MongoDB", color: "#47A248" },
+    { label: "MediaPipe", color: "#00C2E8" },
   ];
   return (
     <OrbitCard className="p-5 flex flex-col gap-4 w-full h-full justify-center">
@@ -142,9 +142,9 @@ function PhotoCard() {
 
 function QuickFactsCard() {
   const facts = [
-    { icon: "🎓", text: "B.Tech CS" },
-    { icon: "🚀", text: "3+ Years Exp" },
-    { icon: "🌐", text: "Web3 & AI" },
+    { icon: "🎓", text: "B.Tech Fr. CRCE" },
+    { icon: "🚀", text: "TEDxCRCE Head" },
+    { icon: "🌐", text: "AI & Full-Stack" },
   ];
   return (
     <OrbitCard className="p-5 flex flex-col justify-center w-full h-full">

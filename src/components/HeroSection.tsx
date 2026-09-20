@@ -290,7 +290,7 @@ export function HeroSection() {
               className="w-fit"
             >
               <p className={`font-mono text-xs sm:text-sm tracking-[0.22em] uppercase transition-colors duration-700 ${isDark ? "text-white/50" : "text-[#707070]"}`}>
-                Creative Developer · UI/UX Designer
+                Computer Engineer · Developer · Problem Solver
               </p>
               <div className={`h-px w-full mt-3 mb-0 transition-colors duration-700 ${isDark ? "bg-[#7c3aed]/40" : "bg-[#707070]/20"}`} />
             </motion.div>

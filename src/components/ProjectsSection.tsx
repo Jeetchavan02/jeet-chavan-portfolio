@@ -13,34 +13,26 @@ import { motion, AnimatePresence } from 'framer-motion';
 const projects: ProjectData[] = [
   {
     id: '1',
-    title: 'Luminous Glass',
-    tech: ['React', 'Three.js', 'GSAP'],
-    desc: 'An immersive, high-fidelity 3D portfolio featuring spatial UI and advanced hardware-accelerated animations.',
+    title: 'AutoFair',
+    tech: ['React', 'Node.js', 'OCR', 'GPS'],
+    desc: 'OCR + GPS-based system to detect auto-rickshaw overcharging and generate evidence for complaints. Built under HOD mentorship with RTO consultation for regulatory accuracy.',
     image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop',
     link: '#'
   },
   {
     id: '2',
-    title: 'Nexus Platform',
-    tech: ['Next.js', 'Tailwind', 'Framer'],
-    desc: 'A futuristic design system built with ultra-modern glassmorphism patterns and flawless micro-interactions.',
+    title: 'Aegis Intel',
+    tech: ['Python', 'Naive Bayes', 'Groq LLM'],
+    desc: 'Solo-built claim verification engine combining Naive Bayes + Groq LLM to produce a 0–100 credibility score. Deterministic vote-trace architecture classifies content as Verified / Suspicious / Manipulated.',
     image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2000&auto=format&fit=crop',
     link: '#'
   },
   {
     id: '3',
-    title: 'Nova API',
-    tech: ['Node.js', 'Redis', 'PostgreSQL'],
-    desc: 'A globally distributed, ultra-low latency architecture capable of sustaining 10k+ concurrent connections.',
+    title: 'SenseAll',
+    tech: ['MediaPipe', 'Roboflow', 'React'],
+    desc: 'Multimodal platform supporting ISL recognition (18 gestures) speech-to-text, Braille, and haptics. Browser-based inference via MediaPipe + Roboflow CNN fallback for privacy and low latency.',
     image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=2000&auto=format&fit=crop',
-    link: '#'
-  },
-  {
-    id: '4',
-    title: 'Aura Intelligence',
-    tech: ['Python', 'PyTorch', 'WebRTC'],
-    desc: 'Real-time computer vision pipeline processing 60fps video streams with sub-millisecond object detection.',
-    image: 'https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=2000&auto=format&fit=crop',
     link: '#'
   },
 ];

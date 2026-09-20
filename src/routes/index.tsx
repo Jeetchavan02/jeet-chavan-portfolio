@@ -1,7 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { motion, useScroll, useSpring } from "framer-motion";
 import { Navbar } from "@/components/Navbar";
 import { HeroSection } from "@/components/HeroSection";
 import { AboutBento } from "@/components/AboutBento";
+import { ExperienceSection } from "@/components/ExperienceSection";
 import { ProjectsSection } from "@/components/ProjectsSection";
 import { ContactSection } from "@/components/ContactSection";
 
@@ -28,11 +30,23 @@ export const Route = createFileRoute("/")(({
 }));
 
 function Index() {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
   return (
     <main className="relative min-h-screen overflow-x-hidden" style={{ background: "#0A0D14" }}>
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#7c6bff] to-[#34d399] origin-left z-[100]"
+        style={{ scaleX }}
+      />
       <Navbar />
       <HeroSection />
       <AboutBento />
+      <ExperienceSection />
       <ProjectsSection />
       <ContactSection />
     </main>

@@ -88,13 +88,13 @@ export function OrbitCard({ children, className = '', style = {} }: OrbitCardPro
   return (
     <div 
       ref={cardRef} 
-      className={`orbit-module relative overflow-hidden rounded-2xl will-change-transform ${className}`}
+      className={`orbit-module relative overflow-hidden rounded-[32px] will-change-transform ${className}`}
       style={{
         ...style,
-        background: "rgba(124,107,255,0.08)",
-        border: "1px solid rgba(124,107,255,0.20)",
-        backdropFilter: "blur(20px)",
-        boxShadow: "0 0 20px rgba(124, 107, 255, 0.05)",
+        background: "rgba(255, 255, 255, 0.05)",
+        border: "1px solid rgba(255, 255, 255, 0.15)",
+        backdropFilter: "blur(40px)",
+        boxShadow: "0 10px 40px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
       }}
     >
       <div className="relative z-10 h-full w-full">{children}</div>

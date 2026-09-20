@@ -8,12 +8,12 @@ import { SandboxCanvas } from "./SandboxCanvas";
 function BioCard() {
   return (
     <div
-      className="w-full h-full p-6 flex flex-col justify-center rounded-2xl"
+      className="w-full h-full p-8 lg:p-10 flex flex-col justify-center rounded-[32px]"
       style={{
-        background: "rgba(124,107,255,0.08)",
-        border: "1px solid rgba(124,107,255,0.30)",
-        backdropFilter: "blur(20px)",
-        boxShadow: "0 0 30px rgba(124, 107, 255, 0.1)",
+        background: "rgba(255, 255, 255, 0.05)",
+        border: "1px solid rgba(255, 255, 255, 0.15)",
+        backdropFilter: "blur(40px)",
+        boxShadow: "0 10px 40px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
       }}
     >
       <div>
@@ -44,7 +44,7 @@ function StackCard() {
     { label: "MediaPipe", color: "#00C2E8" },
   ];
   return (
-    <OrbitCard className="p-5 flex flex-col gap-4 w-full h-full justify-center">
+    <OrbitCard className="p-6 lg:p-8 flex flex-col gap-4 w-full h-full justify-center">
       <p className="font-mono-brand text-xs text-white/40 uppercase tracking-widest">Core Stack</p>
       <div className="flex flex-wrap gap-2">
         {skills.map((s) => (
@@ -67,7 +67,7 @@ function StackCard() {
 
 function StatusCard() {
   return (
-    <OrbitCard className="p-5 flex flex-col justify-between w-full h-full">
+    <OrbitCard className="p-6 lg:p-8 flex flex-col justify-between w-full h-full">
       <div>
         <p className="font-mono-brand text-xs text-white/40 uppercase tracking-widest mb-3">Status</p>
         <div className="flex items-center gap-2">
@@ -91,7 +91,7 @@ function StatusCard() {
 
 function SocialCard() {
   return (
-    <OrbitCard className="p-5 flex flex-col justify-center items-center w-full h-full gap-3">
+    <OrbitCard className="p-6 lg:p-8 flex flex-col justify-center items-center w-full h-full gap-3">
       <p className="font-mono-brand text-xs text-white/40 uppercase tracking-widest">Connect</p>
       <a href="#" className="text-white hover:text-[#7c6bff] transition-colors text-sm font-semibold">GitHub ↗</a>
       <a href="#" className="text-white hover:text-[#7c6bff] transition-colors text-sm font-semibold">Twitter ↗</a>
@@ -147,7 +147,7 @@ function QuickFactsCard() {
     { icon: "🌐", text: "AI & Full-Stack" },
   ];
   return (
-    <OrbitCard className="p-5 flex flex-col justify-center w-full h-full">
+    <OrbitCard className="p-6 lg:p-8 flex flex-col justify-center w-full h-full">
       <p className="font-mono-brand text-xs text-white/40 uppercase tracking-widest mb-3">Quick facts</p>
       <ul className="space-y-2">
         {facts.map((f) => (
@@ -156,6 +156,60 @@ function QuickFactsCard() {
           </li>
         ))}
       </ul>
+    </OrbitCard>
+  );
+}
+
+function SpotifyCard() {
+  return (
+    <OrbitCard className="p-6 lg:p-8 flex flex-col justify-between w-full h-full relative overflow-hidden group">
+      <div className="absolute -top-4 -right-4 p-4 opacity-[0.03] transition-transform duration-500 group-hover:scale-110">
+        <svg viewBox="0 0 24 24" fill="currentColor" className="w-32 h-32 text-white"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.24 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15.001 10.62 18.66 12.84c.361.181.54.78.3 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.6.18-1.2.72-1.38 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.239.54-.959.72-1.56.3z"/></svg>
+      </div>
+      <div>
+        <p className="font-mono-brand text-xs text-[#1DB954] uppercase tracking-widest relative z-10 flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-[#1DB954] animate-pulse"></span>
+          On Repeat
+        </p>
+      </div>
+      <div className="relative z-10">
+        <p className="text-base font-bold text-white mb-1">Starboy</p>
+        <p className="text-xs text-white/60">The Weeknd, Daft Punk</p>
+      </div>
+    </OrbitCard>
+  );
+}
+
+function GithubCard() {
+  return (
+    <OrbitCard className="p-6 lg:p-8 flex flex-col justify-between w-full h-full relative overflow-hidden">
+      <p className="font-mono-brand text-xs text-white/40 uppercase tracking-widest mb-3">Code Activity</p>
+      <div className="flex-grow flex flex-col justify-center">
+        <p className="text-4xl font-bold text-white">450<span className="text-[#34d399]">+</span></p>
+        <p className="text-[10px] text-white/50 mt-1 uppercase tracking-wider">Commits this year</p>
+      </div>
+      <div className="flex gap-1.5 mt-4 opacity-70">
+        {[...Array(8)].map((_, i) => (
+          <div key={i} className={`flex-1 h-1.5 rounded-full ${[1, 3, 4, 6].includes(i) ? 'bg-[#34d399]' : 'bg-white/10'}`} />
+        ))}
+      </div>
+    </OrbitCard>
+  );
+}
+
+function LeadershipCard() {
+  return (
+    <OrbitCard className="p-6 lg:p-8 flex flex-col justify-between w-full h-full" style={{ background: "linear-gradient(135deg, rgba(235, 20, 20, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%)" }}>
+      <div>
+        <p className="font-mono-brand text-xs text-red-500 uppercase tracking-widest mb-1">TEDxCRCE</p>
+        <p className="text-[10px] text-white/40 uppercase tracking-wider mb-3">Sponsorship Head</p>
+      </div>
+      <div>
+        <p className="text-3xl font-bold text-white mb-1">400<span className="text-red-500">+</span></p>
+        <p className="text-[11px] text-white/60 leading-relaxed">
+          Attendees managed via successful budget & resource allocation.
+        </p>
+      </div>
     </OrbitCard>
   );
 }
@@ -216,7 +270,7 @@ export function AboutBento() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-60px" }}
-          className="grid grid-cols-1 lg:grid-cols-4 lg:grid-rows-4 gap-4 auto-rows-[160px] lg:auto-rows-[1fr] lg:aspect-[16/10]"
+          className="grid grid-cols-1 lg:grid-cols-4 lg:grid-rows-4 gap-5 auto-rows-[160px] lg:auto-rows-[1fr] lg:aspect-[16/10]"
         >
           {/* Row 1 */}
           <div className="lg:col-start-1 lg:row-start-1"><StatusCard /></div>
@@ -231,11 +285,11 @@ export function AboutBento() {
 
           {/* Row 2 & 3 - Left Flank */}
           <div className="lg:col-start-1 lg:row-start-2"><QuickFactsCard /></div>
-          <div className="lg:col-start-1 lg:row-start-3"><OrbitCard className="w-full h-full flex items-center justify-center"><span className="text-3xl">⚛️</span></OrbitCard></div>
+          <div className="lg:col-start-1 lg:row-start-3"><SpotifyCard /></div>
 
           {/* Row 2 & 3 - Right Flank */}
-          <div className="lg:col-start-4 lg:row-start-2"><OrbitCard className="w-full h-full flex items-center justify-center"><span className="text-3xl">🛠️</span></OrbitCard></div>
-          <div className="lg:col-start-4 lg:row-start-3"><OrbitCard className="w-full h-full flex items-center justify-center"><span className="text-3xl">🔮</span></OrbitCard></div>
+          <div className="lg:col-start-4 lg:row-start-2"><GithubCard /></div>
+          <div className="lg:col-start-4 lg:row-start-3"><LeadershipCard /></div>
 
           {/* Row 4 - Sandbox Lab */}
           <div className="lg:col-start-1 lg:col-span-4 lg:row-start-4">

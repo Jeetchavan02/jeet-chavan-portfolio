@@ -29,7 +29,7 @@ export function AboutBento() {
     { id: 'stack', component: <MatterStackCard />, expanded: <MatterStackExpanded />, classes: 'lg:col-start-3 lg:row-start-1' },
     { id: 'social', component: <SocialHubCard />, expanded: null, classes: 'lg:col-start-4 lg:row-start-1' },
     
-    { id: 'bio', component: <BioCard />, expanded: <BioExpanded />, classes: 'lg:col-start-2 lg:col-span-2 lg:row-start-2 lg:row-span-2 order-first lg:order-none row-span-2' },
+    { id: 'bio', component: <BioCard />, expanded: null, classes: 'lg:col-start-2 lg:col-span-2 lg:row-start-2 lg:row-span-2 order-first lg:order-none row-span-2' },
     
     { id: 'hero', component: <HeroCard />, expanded: <HeroExpanded />, classes: 'lg:col-start-1 lg:row-start-2' },
     { id: 'spotify', component: <SpotifyEqualizerCard />, expanded: <SpotifyExpanded />, classes: 'lg:col-start-1 lg:row-start-3' },

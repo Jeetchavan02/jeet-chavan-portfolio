@@ -95,9 +95,9 @@ export function HeroExpanded() {
           <div className="flex-1">
             <h1 className="text-5xl lg:text-7xl font-black tracking-tighter mb-4 text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white/50 flex items-center gap-3">
               ATLAS 
-              <svg className="w-10 h-10 lg:w-14 lg:h-14 text-white hover:rotate-12 transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <circle cx="12" cy="12" r="5" />
-                <ellipse cx="12" cy="12" rx="10" ry="3" transform="rotate(-20 12 12)" />
+              <svg className="w-10 h-10 lg:w-14 lg:h-14 text-white hover:rotate-12 transition-transform duration-300" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="5" fill="currentColor" />
+                <ellipse cx="12" cy="12" rx="10" ry="3" transform="rotate(-20 12 12)" stroke="currentColor" strokeWidth="1.5" />
               </svg>
             </h1>
             <p className="text-xl text-[#00e5ff] font-medium mb-6">
@@ -176,8 +176,8 @@ export function HeroExpanded() {
 /* 3. Matter.js Tech Stack Card */
 export function MatterStackCard() {
   const shields = [
-    "https://img.shields.io/badge/React-18-007ACC.svg?style=for-the-badge&logo=react",
     "https://img.shields.io/badge/C++-00599C.svg?style=for-the-badge&logo=c%2B%2B",
+    "https://img.shields.io/badge/React-18-007ACC.svg?style=for-the-badge&logo=react",
     "https://img.shields.io/badge/Node.js-18-339933.svg?style=for-the-badge&logo=nodedotjs",
     "https://img.shields.io/badge/MongoDB-8-47A248.svg?style=for-the-badge&logo=mongodb",
     "https://img.shields.io/badge/TypeScript-5.0-3178C6.svg?style=for-the-badge&logo=typescript"
@@ -231,8 +231,8 @@ export function MatterStackExpanded() {
   };
 
   const shields = [
-    "https://img.shields.io/badge/React-18-007ACC.svg?style=for-the-badge&logo=react",
     "https://img.shields.io/badge/C++-00599C.svg?style=for-the-badge&logo=c%2B%2B",
+    "https://img.shields.io/badge/React-18-007ACC.svg?style=for-the-badge&logo=react",
     "https://img.shields.io/badge/Node.js-18-339933.svg?style=for-the-badge&logo=nodedotjs",
     "https://img.shields.io/badge/MongoDB-8-47A248.svg?style=for-the-badge&logo=mongodb",
     "https://img.shields.io/badge/TypeScript-5.0-3178C6.svg?style=for-the-badge&logo=typescript"

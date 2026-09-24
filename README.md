@@ -2,12 +2,7 @@
 
 # ✨ Welcome to My Digital Playground
 
-### *Hi there! I'm Jeet Chavan, and this is the source code for my interactive 3D portfolio.*
-
-[![Vite](https://img.shields.io/badge/Vite-8.1-646CFF?style=flat-square&logo=vite)](https://vitejs.dev/)
-[![React](https://img.shields.io/badge/React-19.2-61DAFB?style=flat-square&logo=react)](https://react.dev/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=flat-square&logo=typescript)](https://typescriptlang.org)
-[![Three.js](https://img.shields.io/badge/Three.js-0.185-black?style=flat-square&logo=threedotjs)](https://threejs.org/)
+### *Hi there! I'm Jeet Chavan.*
 
 ---
 
@@ -37,17 +32,7 @@ If you're curious about the stack, I used some of my favorite modern tools to pu
 - **3D & Motion**: Three.js (via React Three Fiber) and Framer Motion.
 - **Routing**: TanStack Router for type-safe, seamless page transitions.
 
----
 
-## 🚀 Want to run it locally?
-
-If you want to clone this and play around with the code yourself, it's super easy:
-
-1. **Clone it**: `git clone https://github.com/Jeetchavan02/jeet-chavan-portfolio.git`
-2. **Install**: `npm install`
-3. **Run it**: `npm run dev`
-
----
 
 ## 📫 Let's Connect!
 

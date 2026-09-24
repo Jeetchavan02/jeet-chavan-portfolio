@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Renderer, Program, Mesh, Triangle, Color } from 'ogl';
 import './SpecularButton.css';
 
@@ -44,6 +44,14 @@ float gaussianLine(float d, float sigma) {
 
 void main() {
   vec2 p = gl_FragCoord.xy - uCenter;
+  // Invert the y-axis because WebGL's fragCoord has origin at bottom-left
+  // but our mouse and element coordinates treat y=0 at the top.
+  // Actually, WebGL canvas matches standard viewport if we don't mess with it.
+  // Wait, the center of the canvas is (PAD+w/2, PAD+h/2).
+  // p is relative to the center.
+  // If the shadow looks shifted down, it's possible that the canvas itself is pushed down 
+  // because the span is display: inline and affected by line-height?
+  
   float d = shapeSDF(p);
   vec2 L = vec2(cos(uAngle), sin(uAngle));
 
@@ -61,6 +69,26 @@ void main() {
   fragColor = vec4(col, a);
 }
 `;
+
+export interface SpecularButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  children?: React.ReactNode;
+  size?: 'sm' | 'md' | 'lg';
+  radius?: number;
+  tint?: string;
+  tintOpacity?: number;
+  blur?: number;
+  textColor?: string;
+  lineColor?: string;
+  baseColor?: string;
+  intensity?: number;
+  shineSize?: number;
+  shineFade?: number;
+  thickness?: number;
+  speed?: number;
+  followMouse?: boolean;
+  proximity?: number;
+  autoAnimate?: boolean;
+}
 
 const SpecularButton = ({
   children = 'Get Started',
@@ -83,11 +111,12 @@ const SpecularButton = ({
   disabled = false,
   onClick,
   className = '',
-  type = 'button'
-}) => {
-  const btnRef = useRef(null);
-  const fxRef = useRef(null);
-  const propsRef = useRef({});
+  type = 'button',
+  ...rest
+}: SpecularButtonProps) => {
+  const btnRef = useRef<HTMLButtonElement>(null);
+  const fxRef = useRef<HTMLSpanElement>(null);
+  const propsRef = useRef<any>({});
 
   propsRef.current = { radius, lineColor, baseColor, intensity, shineSize, shineFade, thickness, speed, followMouse, proximity, autoAnimate };
 
@@ -104,7 +133,7 @@ const SpecularButton = ({
     gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
 
     const geometry = new Triangle(gl);
-    if (geometry.attributes.uv) delete geometry.attributes.uv;
+    if (geometry.attributes.uv) delete (geometry.attributes as any).uv;
 
     const program = new Program(gl, {
       vertex: VERT,
@@ -121,7 +150,6 @@ const SpecularButton = ({
         uShineSize: { value: 0.17 },
         uShineFade: { value: 0.7 },
         uThickness: { value: 1 },
-
         uBaseWidth: { value: dpr }
       }
     });
@@ -131,12 +159,18 @@ const SpecularButton = ({
 
     const sizeRef = { w: 1, h: 1 };
     const resize = () => {
+      if (!btn) return;
       const rect = btn.getBoundingClientRect();
       const w = rect.width;
       const h = rect.height;
       sizeRef.w = w;
       sizeRef.h = h;
       renderer.setSize(w + PAD * 2, h + PAD * 2);
+      // We must account for WebGL coordinates being bottom-left origin.
+      // Actually gl_FragCoord is bottom-left. 
+      // If the canvas is 100% height but positioned via CSS inset: -20px,
+      // the center of the rounded rect is w/2, h/2 from the bottom left...
+      // PAD is 20. 
       program.uniforms.uCenter.value = [(PAD + w / 2) * dpr, (PAD + h / 2) * dpr];
       program.uniforms.uHalfSize.value = [(w / 2) * dpr, (h / 2) * dpr];
     };
@@ -144,9 +178,9 @@ const SpecularButton = ({
     ro.observe(btn);
     resize();
 
-    let pointerAngle = null;
+    let pointerAngle: number | null = null;
     let proximityT = 0;
-    const onPointerMove = e => {
+    const onPointerMove = (e: PointerEvent) => {
       const rect = btn.getBoundingClientRect();
       const cx = rect.left + rect.width / 2;
       const cy = rect.top + rect.height / 2;
@@ -174,7 +208,7 @@ const SpecularButton = ({
     const lineC = new Color();
     const baseC = new Color();
 
-    const update = now => {
+    const update = (now: number) => {
       raf = requestAnimationFrame(update);
       const dt = Math.min((now - last) / 1000, 0.05);
       last = now;
@@ -182,7 +216,7 @@ const SpecularButton = ({
 
       idleAngle += p.speed * dt;
       const steer = p.followMouse && pointerAngle != null && (!p.autoAnimate || proximityT > 0);
-      const target = steer ? pointerAngle : idleAngle;
+      const target = steer ? pointerAngle! : idleAngle;
       const diff = ((target - angle + Math.PI * 3) % (Math.PI * 2)) - Math.PI;
       angle += diff * (1 - Math.exp(-dt * 7));
 
@@ -225,7 +259,8 @@ const SpecularButton = ({
         '--sb-tint-opacity': tintOpacity,
         '--sb-blur': `${blur}px`,
         '--sb-text-color': textColor
-      }}
+      } as React.CSSProperties}
+      {...rest}
     >
       <span ref={fxRef} className="specular-button__fx" aria-hidden="true" />
       <span className="specular-button__label">{children}</span>

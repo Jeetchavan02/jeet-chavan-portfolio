@@ -9,10 +9,10 @@ export function BioCard() {
     <div
       className="w-full h-full p-8 lg:p-10 flex flex-col justify-center rounded-[32px] cursor-pointer group"
       style={{
-        background: "rgba(255, 255, 255, 0.05)",
-        border: "none",
-        backdropFilter: "blur(40px)",
-        boxShadow: "0 10px 40px rgba(0, 0, 0, 0.2)",
+        background: "rgba(255, 255, 255, 0.08)",
+        border: "1px solid rgba(255, 255, 255, 0.1)",
+        backdropFilter: "blur(60px)",
+        boxShadow: "0 10px 40px rgba(0, 0, 0, 0.3)",
       }}
     >
       <div>

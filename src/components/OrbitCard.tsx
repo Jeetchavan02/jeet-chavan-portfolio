@@ -93,10 +93,10 @@ export function OrbitCard({ children, className = '', style = {}, onClick }: Orb
       className={`orbit-module relative overflow-hidden rounded-[32px] will-change-transform ${onClick ? 'cursor-pointer' : ''} ${className}`}
       style={{
         ...style,
-        background: "rgba(255, 255, 255, 0.05)",
-        border: "none",
-        backdropFilter: "blur(40px)",
-        boxShadow: "0 10px 40px rgba(0, 0, 0, 0.2)",
+        background: "rgba(255, 255, 255, 0.08)",
+        border: "1px solid rgba(255, 255, 255, 0.1)",
+        backdropFilter: "blur(60px)",
+        boxShadow: "0 10px 40px rgba(0, 0, 0, 0.3)",
       }}
     >
       <div className="relative z-10 h-full w-full">{children}</div>

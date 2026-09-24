@@ -38,7 +38,7 @@ function MagneticButton() {
         style={{
           x: sx,
           y: sy,
-          background: "linear-gradient(135deg, #7c6bff, #34d399)",
+          background: "linear-gradient(135deg, #7c6bff, #00e5ff)",
           boxShadow: hovered
             ? "0 0 40px rgba(124,107,255,0.7), 0 0 80px rgba(52,211,153,0.3)"
             : "0 0 20px rgba(124,107,255,0.35)",
@@ -73,7 +73,7 @@ function GlassToggle() {
   const colors: Record<typeof OPTIONS[number], string> = {
     Design: "#c084fc",
     Dev: "#60a5fa",
-    Both: "#34d399",
+    Both: "#00e5ff",
   };
 
   return (
@@ -202,7 +202,7 @@ export function UiPlayground() {
         className="ambient-blob"
         style={{
           width: 500, height: 300,
-          background: "#34d399",
+          background: "#00e5ff",
           bottom: "5%", right: "0",
           opacity: 0.09,
         }}

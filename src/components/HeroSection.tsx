@@ -148,29 +148,33 @@ function smoothScrollTo(id: string) {
   const el = document.getElementById(id);
   if (!el) return;
   
-  // Disable CSS smooth scroll temporarily so the jump is truly instant
   document.documentElement.style.scrollBehavior = 'auto';
-  
-  // Jump instantly to the element
   el.scrollIntoView({ behavior: 'auto' });
   
-  // Create an interval to lock onto the element for the next 1.5 seconds 
-  // to combat any layout shifts from IntersectionObservers
   let ticks = 0;
-  const interval = setInterval(() => {
+  let interval: ReturnType<typeof setInterval>;
+  
+  const cancelScroll = () => {
+    clearInterval(interval);
+    document.documentElement.style.scrollBehavior = '';
+    window.removeEventListener('wheel', cancelScroll);
+    window.removeEventListener('touchmove', cancelScroll);
+  };
+
+  window.addEventListener('wheel', cancelScroll, { passive: true });
+  window.addEventListener('touchmove', cancelScroll, { passive: true });
+
+  interval = setInterval(() => {
     const target = document.getElementById(id);
     if (target) {
       const rect = target.getBoundingClientRect();
-      // If we are more than 5px off, adjust instantly
       if (Math.abs(rect.top) > 5) {
         window.scrollBy(0, rect.top);
       }
     }
     ticks++;
     if (ticks > 15) {
-      clearInterval(interval);
-      // Restore CSS smooth scroll
-      document.documentElement.style.scrollBehavior = '';
+      cancelScroll();
     }
   }, 100);
 }

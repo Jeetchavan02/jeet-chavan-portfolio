@@ -216,7 +216,7 @@
 
 /* Code highlight colours */
 @utility code-keyword  { color: #7c6bff; }
-@utility code-string   { color: #34d399; }
+@utility code-string   { color: #00e5ff; }
 @utility code-comment  { color: rgba(255,255,255,0.35); font-style: italic; }
 @utility code-fn       { color: #60a5fa; }
 @utility code-number   { color: #f97316; }

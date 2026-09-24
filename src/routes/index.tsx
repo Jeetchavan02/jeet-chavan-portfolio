@@ -29,7 +29,16 @@ export const Route = createFileRoute("/")(({
   component: Index,
 }));
 
+import { useEffect } from "react";
+
 function Index() {
+  useEffect(() => {
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+  }, []);
+
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -40,7 +49,7 @@ function Index() {
   return (
     <main className="relative min-h-screen overflow-x-hidden" style={{ background: "#0A0D14" }}>
       <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#7c6bff] to-[#34d399] origin-left z-[100]"
+        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#7c6bff] to-[#00e5ff] origin-left z-[100]"
         style={{ scaleX }}
       />
       <Navbar />

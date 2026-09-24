@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useTheme } from "../lib/ThemeContext";
 
 interface LogoProps {
   size?: number;
@@ -6,6 +7,9 @@ interface LogoProps {
 }
 
 export function JCLogo({ size = 32, className = "" }: LogoProps) {
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
+
   const draw = {
     hidden: { pathLength: 0, opacity: 0 },
     visible: (i: number) => {
@@ -25,8 +29,6 @@ export function JCLogo({ size = 32, className = "" }: LogoProps) {
     <motion.div 
       className={`relative flex items-center justify-center ${className}`}
       style={{ width: size, height: size }}
-      whileHover={{ scale: 1.1, rotate: 90 }}
-      transition={{ type: "spring", stiffness: 400, damping: 10 }}
     >
       <svg
         width={size}
@@ -39,7 +41,7 @@ export function JCLogo({ size = 32, className = "" }: LogoProps) {
         {/* The "J" - sharp, brutalist, minimal */}
         <motion.path
           d="M 40 20 L 40 70 L 20 70 L 20 60"
-          stroke="#7c3aed"
+          stroke={isDark ? "#7c3aed" : "#7c3aed"}
           strokeWidth="6"
           strokeLinecap="square"
           strokeLinejoin="miter"
@@ -52,7 +54,7 @@ export function JCLogo({ size = 32, className = "" }: LogoProps) {
         {/* The "C" - sharp, brutalist, minimal */}
         <motion.path
           d="M 80 30 L 60 30 L 60 70 L 80 70"
-          stroke="#fff"
+          stroke={isDark ? "#fff" : "#1d1d1f"}
           strokeWidth="6"
           strokeLinecap="square"
           strokeLinejoin="miter"
@@ -62,25 +64,6 @@ export function JCLogo({ size = 32, className = "" }: LogoProps) {
           animate="visible"
         />
         
-        {/* Technical framing lines */}
-        <motion.path
-          d="M 0 0 L 10 0 M 90 0 L 100 0 M 0 100 L 10 100 M 90 100 L 100 100"
-          stroke="#444"
-          strokeWidth="2"
-          custom={2}
-          variants={draw}
-          initial="hidden"
-          animate="visible"
-        />
-        <motion.path
-          d="M 0 0 L 0 10 M 100 0 L 100 10 M 0 90 L 0 100 M 100 90 L 100 100"
-          stroke="#444"
-          strokeWidth="2"
-          custom={2}
-          variants={draw}
-          initial="hidden"
-          animate="visible"
-        />
       </svg>
     </motion.div>
   );

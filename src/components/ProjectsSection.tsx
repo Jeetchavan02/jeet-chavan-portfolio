@@ -16,15 +16,15 @@ const projects: ProjectData[] = [
     title: 'AutoFair',
     tech: ['React', 'Node.js', 'OCR', 'GPS'],
     desc: 'OCR + GPS-based system to detect auto-rickshaw overcharging and generate evidence for complaints. Built under HOD mentorship with RTO consultation for regulatory accuracy.',
-    image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop',
-    link: '#'
+    image: '/projects/autofair.png',
+    link: 'https://github.com/SanikaLobo/Autofair_TISD'
   },
   {
     id: '2',
     title: 'Aegis Intel',
     tech: ['Python', 'Naive Bayes', 'Groq LLM'],
     desc: 'Solo-built claim verification engine combining Naive Bayes + Groq LLM to produce a 0–100 credibility score. Deterministic vote-trace architecture classifies content as Verified / Suspicious / Manipulated.',
-    image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2000&auto=format&fit=crop',
+    image: '/projects/aegis.jpg',
     link: '#'
   },
   {
@@ -32,8 +32,9 @@ const projects: ProjectData[] = [
     title: 'SenseAll',
     tech: ['MediaPipe', 'Roboflow', 'React'],
     desc: 'Multimodal platform supporting ISL recognition (18 gestures) speech-to-text, Braille, and haptics. Browser-based inference via MediaPipe + Roboflow CNN fallback for privacy and low latency.',
-    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=2000&auto=format&fit=crop',
-    link: '#'
+    image: '/projects/senseall-light.png',
+    imageDark: '/projects/senseall-dark.png',
+    link: 'https://github.com/SanikaLobo/SenseAll'
   },
 ];
 
@@ -528,6 +529,8 @@ export function ProjectsSection() {
                           </p>
                           <a 
                             href={p.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className={`mt-8 inline-flex items-center gap-2 px-8 py-3.5 rounded-full text-[15px] font-semibold transition-colors ${
                               isDark 
                                 ? 'bg-white text-black hover:bg-white/90' 
@@ -553,7 +556,9 @@ export function ProjectsSection() {
               className="mt-8 flex justify-start"
             >
               <a 
-                href="#" 
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
                 className={`group flex items-center gap-2 rounded-full px-8 py-3.5 text-sm font-semibold transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] ${
                   isDark 
                     ? 'bg-white text-black hover:bg-white/90' 

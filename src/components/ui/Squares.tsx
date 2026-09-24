@@ -65,19 +65,7 @@ export function Squares({
         }
       }
 
-      const radialGradient = ctx.createRadialGradient(
-        canvas.width / 2,
-        canvas.height / 2,
-        0,
-        canvas.width / 2,
-        canvas.height / 2,
-        Math.max(canvas.width, canvas.height) / 2
-      );
-      radialGradient.addColorStop(0, 'transparent');
-      radialGradient.addColorStop(1, '#000');
 
-      ctx.fillStyle = radialGradient;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
     };
 
     const updateAnimation = () => {

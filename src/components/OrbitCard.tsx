@@ -4,9 +4,10 @@ interface OrbitCardProps {
   children: React.ReactNode;
   className?: string;
   style?: React.CSSProperties;
+  onClick?: () => void;
 }
 
-export function OrbitCard({ children, className = '', style = {} }: OrbitCardProps) {
+export function OrbitCard({ children, className = '', style = {}, onClick }: OrbitCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -88,13 +89,14 @@ export function OrbitCard({ children, className = '', style = {} }: OrbitCardPro
   return (
     <div 
       ref={cardRef} 
-      className={`orbit-module relative overflow-hidden rounded-[32px] will-change-transform ${className}`}
+      onClick={onClick}
+      className={`orbit-module relative overflow-hidden rounded-[32px] will-change-transform ${onClick ? 'cursor-pointer' : ''} ${className}`}
       style={{
         ...style,
         background: "rgba(255, 255, 255, 0.05)",
-        border: "1px solid rgba(255, 255, 255, 0.15)",
+        border: "none",
         backdropFilter: "blur(40px)",
-        boxShadow: "0 10px 40px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
+        boxShadow: "0 10px 40px rgba(0, 0, 0, 0.2)",
       }}
     >
       <div className="relative z-10 h-full w-full">{children}</div>

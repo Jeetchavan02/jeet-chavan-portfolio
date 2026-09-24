@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTheme } from "../lib/ThemeContext";
 
 export interface ProjectData {
   id: string;
@@ -7,6 +8,7 @@ export interface ProjectData {
   desc: string;
   tech: string[];
   image: string;
+  imageDark?: string;
   link: string;
 }
 
@@ -15,6 +17,9 @@ interface LaptopDisplayProps {
 }
 
 export function MacOSDesktop({ activeProject }: LaptopDisplayProps) {
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
+
   // If there's no project, we just render a blank or default state
   // Using AnimatePresence to smoothly crossfade the active project image.
   
@@ -23,8 +28,8 @@ export function MacOSDesktop({ activeProject }: LaptopDisplayProps) {
       <AnimatePresence mode="wait">
         {activeProject ? (
           <motion.img
-            key={activeProject.id}
-            src={activeProject.image}
+            key={`${activeProject.id}-${isDark}`}
+            src={isDark && activeProject.imageDark ? activeProject.imageDark : activeProject.image}
             alt={activeProject.title}
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}

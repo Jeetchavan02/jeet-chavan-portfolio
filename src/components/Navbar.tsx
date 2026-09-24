@@ -59,6 +59,40 @@ function ThemeToggle() {
   );
 }
 
+function smoothScrollTo(id: string) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  document.documentElement.style.scrollBehavior = 'auto';
+  el.scrollIntoView({ behavior: 'auto' });
+  
+  let ticks = 0;
+  let interval: ReturnType<typeof setInterval>;
+  
+  const cancelScroll = () => {
+    clearInterval(interval);
+    document.documentElement.style.scrollBehavior = '';
+    window.removeEventListener('wheel', cancelScroll);
+    window.removeEventListener('touchmove', cancelScroll);
+  };
+
+  window.addEventListener('wheel', cancelScroll, { passive: true });
+  window.addEventListener('touchmove', cancelScroll, { passive: true });
+
+  interval = setInterval(() => {
+    const target = document.getElementById(id);
+    if (target) {
+      const rect = target.getBoundingClientRect();
+      if (Math.abs(rect.top) > 5) {
+        window.scrollBy(0, rect.top);
+      }
+    }
+    ticks++;
+    if (ticks > 15) {
+      cancelScroll();
+    }
+  }, 100);
+}
+
 export function Navbar() {
   const { theme } = useTheme();
   const isDark = theme === "dark";
@@ -120,6 +154,10 @@ export function Navbar() {
             <li key={link.label}>
               <a
                 href={link.href}
+                onClick={(e) => {
+                  e.preventDefault();
+                  smoothScrollTo(link.href.slice(1));
+                }}
                 className={`text-sm font-medium transition-colors ${
                   active === link.href.slice(1) 
                     ? (isDark ? "text-white" : "text-[#1d1d1f]") 
@@ -183,7 +221,11 @@ export function Navbar() {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    onClick={() => setMobileOpen(false)}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setMobileOpen(false);
+                      smoothScrollTo(link.href.slice(1));
+                    }}
                     className="block text-sm font-medium text-white/80 hover:text-white transition-colors"
                   >
                     {link.label}

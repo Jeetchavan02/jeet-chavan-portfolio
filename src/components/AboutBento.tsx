@@ -42,7 +42,7 @@ export function AboutBento() {
 
   return (
     <section id="about" className="relative px-4 py-24 bg-[#0A0A0F] overflow-hidden min-h-screen flex items-center">
-      <div className="absolute inset-0 z-0 opacity-30 pointer-events-none blur-xl" style={{ maskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)' }}>
+      <div className="absolute inset-0 z-0 opacity-75 pointer-events-none blur-xl" style={{ maskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)' }}>
         <video autoPlay loop muted playsInline className="w-full h-full object-cover">
           <source src="/hero-bg.mp4" type="video/mp4" />
         </video>

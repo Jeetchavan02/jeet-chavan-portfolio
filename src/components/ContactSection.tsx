@@ -1,10 +1,11 @@
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useTheme } from "../lib/ThemeContext";
 
 const APPS = [
   {
     name: "Mail",
-    href: "mailto:jeetnchavan02@gmail.com",
+    href: "jeetnchavan02@gmail.com",
     bg: "bg-white",
     shadow: "rgba(234,67,53,0.3)",
     icon: (
@@ -45,6 +46,16 @@ const APPS = [
 export function ContactSection() {
   const { theme } = useTheme();
   const isDark = theme === "dark";
+  const [copiedApp, setCopiedApp] = useState<string | null>(null);
+
+  const handleAppClick = (e: React.MouseEvent, app: any) => {
+    if (app.name === "Mail") {
+      e.preventDefault();
+      navigator.clipboard.writeText(app.href);
+      setCopiedApp(app.name);
+      setTimeout(() => setCopiedApp(null), 2000);
+    }
+  };
 
   return (
     <section id="contact" className={`relative px-4 pt-32 pb-16 md:pt-48 md:pb-24 transition-colors duration-700 overflow-hidden flex flex-col items-center justify-center min-h-[70vh] ${isDark ? "bg-[#0A0A0F]" : "bg-[#F5F5FA]"}`}>
@@ -108,12 +119,15 @@ export function ContactSection() {
             <div className="grid grid-cols-2 gap-x-8 gap-y-8 px-6">
               
               {/* Real Apps */}
-              {APPS.map((app, index) => (
+              {APPS.map((app, index) => {
+                const isMail = app.name === "Mail";
+                return (
                 <motion.a
                   key={app.name}
-                  href={app.href}
-                  target={app.href.startsWith("http") ? "_blank" : undefined}
-                  rel={app.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                  href={isMail ? "#" : app.href}
+                  target={!isMail && app.href.startsWith("http") ? "_blank" : undefined}
+                  rel={!isMail && app.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                  onClick={(e) => handleAppClick(e, app)}
                   className="flex flex-col items-center group relative no-underline cursor-pointer"
                   initial={{ opacity: 0, scale: 0.5 }}
                   whileInView={{ opacity: 1, scale: 1 }}
@@ -139,11 +153,11 @@ export function ContactSection() {
                       </div>
                     )}
                   </motion.div>
-                  <span className={`text-[11px] font-[Inter] text-center mt-[6px] truncate w-full ${isDark ? "text-white/80" : "text-[#1a1a2a]"}`}>
-                    {app.name}
+                  <span className={`text-[11px] font-[Inter] text-center mt-[6px] truncate w-full transition-colors duration-300 ${isDark ? "text-white/80" : "text-[#1a1a2a]"}`}>
+                    {copiedApp === app.name ? "Copied!" : app.name}
                   </span>
                 </motion.a>
-              ))}
+              )})}
 
 
             </div>

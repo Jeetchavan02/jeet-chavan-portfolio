@@ -366,17 +366,35 @@ export function MomentumExpanded() {
 }
 
 export function SocialHubCard() {
+  const [copiedApp, setCopiedApp] = useState<string | null>(null);
+
   const socials = [
     { id: 'LinkedIn', icon: 'IN', color: '#0077b5', href: 'https://www.linkedin.com/in/jeetchavan02/' },
-    { id: 'Email', icon: '@', color: '#ec4899', href: 'mailto:jeetnchavan02@gmail.com' },
+    { id: 'Email', icon: '@', color: '#ec4899', isCopy: true, href: 'jeetnchavan02@gmail.com' },
     { id: 'Resume', icon: 'CV', color: '#00e5ff', href: 'https://drive.google.com/drive/folders/1g-pu0NpA4z7rvP-XjzHBR99ZsQoFNir8?usp=sharing' }
   ];
+
+  const handleAppClick = (e: React.MouseEvent, s: any) => {
+    if (s.isCopy) {
+      e.preventDefault();
+      navigator.clipboard.writeText(s.href);
+      setCopiedApp(s.id);
+      setTimeout(() => setCopiedApp(null), 2000);
+    }
+  };
 
   return (
     <OrbitCard className="p-3 lg:p-4 flex flex-col justify-center items-center w-full h-full relative overflow-hidden group">
       <div className="flex flex-col gap-1.5 w-full relative z-10 px-1">
         {socials.map((s) => (
-          <a key={s.id} href={s.href} target="_blank" rel="noreferrer" className="w-full relative group/btn">
+          <a 
+            key={s.id} 
+            href={s.isCopy ? "#" : s.href} 
+            target={!s.isCopy ? "_blank" : undefined} 
+            rel={!s.isCopy ? "noreferrer" : undefined} 
+            onClick={(e) => handleAppClick(e, s)}
+            className="w-full relative group/btn cursor-pointer"
+          >
             <motion.div 
               whileHover={{ scale: 1.05 }} 
               whileTap={{ scale: 0.95 }}
@@ -387,7 +405,9 @@ export function SocialHubCard() {
             >
               <div className="absolute inset-0 opacity-0 group-hover/btn:opacity-20 transition-opacity duration-300" style={{ backgroundColor: s.color }} />
               <span className="font-extrabold text-xs lg:text-sm tracking-wider transition-colors drop-shadow-md z-10" style={{ color: s.color }}>{s.icon}</span>
-              <span className="text-[8px] lg:text-[9px] font-mono text-white/50 group-hover/btn:text-white transition-colors uppercase tracking-[0.2em] z-10">{s.id}</span>
+              <span className="text-[8px] lg:text-[9px] font-mono text-white/50 group-hover/btn:text-white transition-colors uppercase tracking-[0.2em] z-10">
+                {copiedApp === s.id ? "COPIED!" : s.id}
+              </span>
             </motion.div>
           </a>
         ))}

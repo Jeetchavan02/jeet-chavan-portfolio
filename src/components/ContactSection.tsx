@@ -154,27 +154,6 @@ export function ContactSection() {
                 </motion.a>
               ))}
 
-              {/* Ghost Slots */}
-              {[...Array(4)].map((_, i) => (
-                <motion.div 
-                  key={`ghost-${i}`}
-                  initial={{ opacity: 0, scale: 0.5 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: (APPS.length + i) * 0.04, type: "spring", stiffness: 350, damping: 20 }}
-                  className="flex flex-col items-center"
-                >
-                  <div 
-                    className="w-[60px] h-[60px] rounded-[22.5%]"
-                    style={{
-                      background: isDark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.02)",
-                      border: isDark ? "1.5px dashed rgba(255,255,255,0.12)" : "1.5px dashed rgba(0,0,0,0.15)"
-                    }}
-                  />
-                  {/* Invisible spacer to maintain grid height */}
-                  <span className="text-[11px] mt-[6px] opacity-0">Empty</span>
-                </motion.div>
-              ))}
 
             </div>
           </div>

@@ -244,6 +244,24 @@ export function HeroSection() {
           style={{ opacity: useTransform(smoothProgress, [0, 0.5], [0.04, 0]) }}
         />
 
+        {/* ── Decorative Right-Side Element to balance layout ── */}
+        {isLoaded && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1, rotate: 360 }}
+            transition={{ opacity: { duration: 2, delay: 1.5 }, scale: { duration: 2, delay: 1.5 }, rotate: { duration: 120, repeat: Infinity, ease: "linear" } }}
+            className="absolute right-[-15%] top-1/2 -translate-y-1/2 w-[800px] h-[800px] z-0 hidden lg:flex items-center justify-center pointer-events-none"
+            style={{ y: textY, opacity: textOpacity }}
+          >
+            {/* Outer dashed ring */}
+            <div className={`absolute inset-0 rounded-full border-2 border-dashed ${isDark ? "border-white/10" : "border-black/10"}`} />
+            {/* Inner solid ring */}
+            <div className={`absolute w-[600px] h-[600px] rounded-full border ${isDark ? "border-white/5" : "border-black/5"}`} />
+            {/* Core glassmorphic planet */}
+            <div className={`absolute w-[400px] h-[400px] rounded-full backdrop-blur-3xl border border-[#7c3aed]/30 shadow-[0_0_100px_rgba(124,58,237,0.2)] ${isDark ? "bg-[#7c3aed]/5" : "bg-[#7c3aed]/10"}`} />
+          </motion.div>
+        )}
+
         {/* ── Name Block ── */}
         <motion.div
           className="absolute z-10"

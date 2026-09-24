@@ -40,15 +40,6 @@ const APPS = [
       <img src="/icons/files.png" alt="Files" className="w-full h-full object-contain p-[6px]" />
     )
   },
-  {
-    name: "WhatsApp",
-    href: "https://wa.me/918850021599",
-    bg: "bg-[#25D366]",
-    shadow: "rgba(37,211,102,0.4)",
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="w-[28px] h-[28px] text-white"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
-    )
-  }
 ];
 
 export function ContactSection() {
@@ -56,7 +47,7 @@ export function ContactSection() {
   const isDark = theme === "dark";
 
   return (
-    <section id="contact" className={`relative px-4 py-32 md:py-48 transition-colors duration-700 overflow-hidden flex flex-col items-center justify-center min-h-[90vh] ${isDark ? "bg-[#0A0A0F]" : "bg-[#F5F5FA]"}`}>
+    <section id="contact" className={`relative px-4 pt-32 pb-16 md:pt-48 md:pb-24 transition-colors duration-700 overflow-hidden flex flex-col items-center justify-center min-h-[70vh] ${isDark ? "bg-[#0A0A0F]" : "bg-[#F5F5FA]"}`}>
       
       {/* Dot Grid Background */}
       <div 
@@ -114,7 +105,7 @@ export function ContactSection() {
             </div>
 
             {/* App Grid */}
-            <div className="grid grid-cols-3 gap-x-4 gap-y-5">
+            <div className="grid grid-cols-2 gap-x-8 gap-y-8 px-6">
               
               {/* Real Apps */}
               {APPS.map((app, index) => (

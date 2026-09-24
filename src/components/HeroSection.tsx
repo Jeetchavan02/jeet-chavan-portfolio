@@ -7,6 +7,9 @@ import { useTheme } from "../lib/ThemeContext";
 
 /* ── Preloader Overlay (Netflix Style) ── */
 function Preloader({ onComplete }: { onComplete: () => void }) {
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
+
   useEffect(() => {
     const timer = setTimeout(() => {
       onComplete();
@@ -19,7 +22,7 @@ function Preloader({ onComplete }: { onComplete: () => void }) {
       initial={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 1.2, ease: "easeInOut" }}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black overflow-hidden pointer-events-none"
+      className={`fixed inset-0 z-50 flex items-center justify-center overflow-hidden pointer-events-none ${isDark ? "bg-black" : "bg-white"}`}
     >
       <motion.div
         initial={{ scale: 0.8, filter: "blur(0px)", opacity: 0 }}

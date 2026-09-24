@@ -25,7 +25,7 @@ const experiences: ExperienceItem[] = [
   },
   {
     id: "2",
-    role: "Workforce Member",
+    role: "Workforce",
     company: "GDSC CRCE",
     date: "Sep 2024 - Aug 2025",
     description: [

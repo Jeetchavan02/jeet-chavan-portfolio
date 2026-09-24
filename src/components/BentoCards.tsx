@@ -367,7 +367,7 @@ export function MomentumExpanded() {
 
 export function SocialHubCard() {
   const socials = [
-    { id: 'LinkedIn', icon: 'IN', color: '#0077b5', href: 'https://linkedin.com/in/jeet-chavan' },
+    { id: 'LinkedIn', icon: 'IN', color: '#0077b5', href: 'https://www.linkedin.com/in/jeetchavan02/' },
     { id: 'Email', icon: '@', color: '#ec4899', href: 'mailto:jeetnchavan02@gmail.com' },
     { id: 'Resume', icon: 'CV', color: '#00e5ff', href: '/Jeet%20Chavan%20Resume%202026.pdf' }
   ];
@@ -404,7 +404,7 @@ export function SocialHubExpanded() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
         {[
           { n: "GitHub", url: "github.com/jeetchavan", icon: "🐙" },
-          { n: "LinkedIn", url: "linkedin.com/in/jeetchavan", icon: "💼" },
+          { n: "LinkedIn", url: "linkedin.com/in/jeetchavan02", icon: "💼" },
           { n: "Twitter", url: "x.com/jeetchavan", icon: "🐦" },
           { n: "Resume", url: "jeetchavan.com/resume.pdf", icon: "📄" },
         ].map(link => (

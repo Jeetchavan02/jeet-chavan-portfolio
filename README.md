@@ -39,7 +39,7 @@ If you're curious about the stack, I used some of my favorite modern tools to pu
 I'm always open to chatting about creative development, UI/UX design, or any cool new technologies. 
 
 - **Email**: jeetnchavan02@gmail.com
-- **LinkedIn**: [linkedin.com/in/jeet-chavan](https://linkedin.com/in/jeet-chavan)
+- **LinkedIn**: [linkedin.com/in/jeetchavan02](https://www.linkedin.com/in/jeetchavan02/)
 
 <div align="center">
 

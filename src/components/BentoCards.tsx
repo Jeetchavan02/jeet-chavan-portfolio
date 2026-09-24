@@ -369,7 +369,7 @@ export function SocialHubCard() {
   const socials = [
     { id: 'LinkedIn', icon: 'IN', color: '#0077b5', href: 'https://www.linkedin.com/in/jeetchavan02/' },
     { id: 'Email', icon: '@', color: '#ec4899', href: 'mailto:jeetnchavan02@gmail.com' },
-    { id: 'Resume', icon: 'CV', color: '#00e5ff', href: '/Jeet%20Chavan%20Resume%202026.pdf' }
+    { id: 'Resume', icon: 'CV', color: '#00e5ff', href: 'https://drive.google.com/drive/folders/1g-pu0NpA4z7rvP-XjzHBR99ZsQoFNir8?usp=sharing' }
   ];
 
   return (
@@ -406,7 +406,7 @@ export function SocialHubExpanded() {
           { n: "GitHub", url: "github.com/jeetchavan", icon: "🐙" },
           { n: "LinkedIn", url: "linkedin.com/in/jeetchavan02", icon: "💼" },
           { n: "Twitter", url: "x.com/jeetchavan", icon: "🐦" },
-          { n: "Resume", url: "jeetchavan.com/resume.pdf", icon: "📄" },
+          { n: "Resume", url: "drive.google.com/drive/folders/1g-pu0NpA4z7rvP-XjzHBR99ZsQoFNir8?usp=sharing", icon: "📄" },
         ].map(link => (
           <a key={link.n} href={`https://${link.url}`} target="_blank" className="bg-white/5 p-6 rounded-2xl border border-white/10 flex items-center gap-4 hover:bg-white/10 transition-colors group">
             <div className="text-4xl">{link.icon}</div>

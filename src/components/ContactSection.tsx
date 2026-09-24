@@ -32,7 +32,7 @@ const APPS = [
   },
   {
     name: "Resume",
-    href: "/resume.pdf",
+    href: "https://drive.google.com/drive/folders/1g-pu0NpA4z7rvP-XjzHBR99ZsQoFNir8?usp=sharing",
     bg: "bg-white",
     shadow: "rgba(10,132,255,0.3)",
     badge: true,

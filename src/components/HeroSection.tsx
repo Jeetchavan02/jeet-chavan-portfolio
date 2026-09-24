@@ -250,7 +250,7 @@ export function HeroSection() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1, rotate: 360 }}
             transition={{ opacity: { duration: 2, delay: 1.5 }, scale: { duration: 2, delay: 1.5 }, rotate: { duration: 120, repeat: Infinity, ease: "linear" } }}
-            className="absolute right-[-15%] top-1/2 -translate-y-1/2 w-[800px] h-[800px] z-0 hidden lg:flex items-center justify-center pointer-events-none"
+            className="absolute right-[-5%] top-1/2 -translate-y-1/2 w-[800px] h-[800px] z-0 hidden lg:flex items-center justify-center pointer-events-none"
             style={{ y: textY, opacity: textOpacity }}
           >
             {/* Outer dashed ring */}

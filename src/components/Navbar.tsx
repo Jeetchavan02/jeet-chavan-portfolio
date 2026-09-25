@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { JCLogo } from "@/components/JCLogo";
 import { useTheme } from "../lib/ThemeContext";
 
@@ -59,38 +59,15 @@ function ThemeToggle() {
   );
 }
 
-function smoothScrollTo(id: string) {
+
+
+function instantScrollTo(id: string) {
   const el = document.getElementById(id);
   if (!el) return;
-  document.documentElement.style.scrollBehavior = 'auto';
-  el.scrollIntoView({ behavior: 'auto' });
-  
-  let ticks = 0;
-  let interval: ReturnType<typeof setInterval>;
-  
-  const cancelScroll = () => {
-    clearInterval(interval);
-    document.documentElement.style.scrollBehavior = '';
-    window.removeEventListener('wheel', cancelScroll);
-    window.removeEventListener('touchmove', cancelScroll);
-  };
-
-  window.addEventListener('wheel', cancelScroll, { passive: true });
-  window.addEventListener('touchmove', cancelScroll, { passive: true });
-
-  interval = setInterval(() => {
-    const target = document.getElementById(id);
-    if (target) {
-      const rect = target.getBoundingClientRect();
-      if (Math.abs(rect.top) > 5) {
-        window.scrollBy(0, rect.top);
-      }
-    }
-    ticks++;
-    if (ticks > 15) {
-      cancelScroll();
-    }
-  }, 100);
+  const headerOffset = 80;
+  const elementPosition = el.getBoundingClientRect().top;
+  const offsetPosition = elementPosition + window.scrollY - headerOffset;
+  window.scrollTo({ top: offsetPosition, behavior: "auto" });
 }
 
 export function Navbar() {
@@ -98,16 +75,20 @@ export function Navbar() {
   const isDark = theme === "dark";
 
   const [active, setActive] = useState("home");
-  const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const ticking = useRef(false);
+
+  const { scrollY } = useScroll();
+  const navBackground = useTransform(scrollY, [0, 40], ["rgba(0,0,0,0)", isDark ? "rgba(0,0,0,0.1)" : "rgba(255,255,255,0.4)"]);
+  const navBackdrop = useTransform(scrollY, [0, 40], ["blur(0px)", "blur(12px)"]);
+  const navBorder = useTransform(scrollY, [0, 40], ["1px solid rgba(0,0,0,0)", isDark ? "1px solid rgba(255,255,255,0.1)" : "1px solid rgba(0,0,0,0.05)"]);
+  const navShadow = useTransform(scrollY, [0, 40], ["none", isDark ? "0 4px 24px rgba(0,0,0,0.1)" : "0 4px 24px rgba(0,0,0,0.05)"]);
 
   useEffect(() => {
     const onScroll = () => {
       if (ticking.current) return;
       ticking.current = true;
       requestAnimationFrame(() => {
-        setScrolled(window.scrollY > 40);
         // Scroll spy
         const sections = NAV_LINKS.map((l) => l.href.slice(1));
         for (let i = sections.length - 1; i >= 0; i--) {
@@ -131,16 +112,14 @@ export function Navbar() {
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       className="fixed left-0 right-0 top-0 z-50 flex justify-center px-4 pt-4"
     >
-      <nav
+      <motion.nav
         className="flex w-full max-w-5xl items-center justify-between rounded-full px-5 py-3 transition-all duration-300"
         style={{
-          backdropFilter: scrolled ? "blur(12px)" : "none",
-          WebkitBackdropFilter: scrolled ? "blur(12px)" : "none",
-          background: scrolled ? (isDark ? "rgba(0,0,0,0.1)" : "rgba(255,255,255,0.4)") : "transparent",
-          border: scrolled ? (isDark ? "1px solid rgba(255,255,255,0.1)" : "1px solid rgba(0,0,0,0.05)") : "1px solid transparent",
-          boxShadow: scrolled
-            ? (isDark ? "0 4px 24px rgba(0,0,0,0.1)" : "0 4px 24px rgba(0,0,0,0.05)")
-            : "none",
+          background: navBackground,
+          backdropFilter: navBackdrop,
+          WebkitBackdropFilter: navBackdrop,
+          border: navBorder,
+          boxShadow: navShadow,
         }}
       >
         {/* Logo */}
@@ -156,7 +135,7 @@ export function Navbar() {
                 href={link.href}
                 onClick={(e) => {
                   e.preventDefault();
-                  smoothScrollTo(link.href.slice(1));
+                  instantScrollTo(link.href.slice(1));
                 }}
                 className={`text-sm font-medium transition-colors ${
                   active === link.href.slice(1) 
@@ -199,7 +178,7 @@ export function Navbar() {
             />
           ))}
         </button>
-      </nav>
+      </motion.nav>
 
       {/* Mobile menu */}
       <AnimatePresence>
@@ -224,7 +203,7 @@ export function Navbar() {
                     onClick={(e) => {
                       e.preventDefault();
                       setMobileOpen(false);
-                      smoothScrollTo(link.href.slice(1));
+                      instantScrollTo(link.href.slice(1));
                     }}
                     className="block text-sm font-medium text-white/80 hover:text-white transition-colors"
                   >

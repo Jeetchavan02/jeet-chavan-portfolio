@@ -78,7 +78,8 @@
   }
 
   html {
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
+    scroll-padding-top: 80px;
   }
 
   body {
@@ -103,6 +104,13 @@
   ::-webkit-scrollbar-thumb {
     background: rgba(124, 58, 237, 0.5);
     border-radius: 0px;
+  }
+
+  /* Hardware accelerate heavy media to prevent scroll blinking/glitches */
+  video, canvas {
+    will-change: transform, opacity;
+    transform: translateZ(0);
+    backface-visibility: hidden;
   }
 }
 

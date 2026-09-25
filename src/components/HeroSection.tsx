@@ -147,39 +147,15 @@ function StaggeredHeading({ text, className, style, play }: { text: string, clas
   );
 }
 
-function smoothScrollTo(id: string) {
+
+
+function instantScrollTo(id: string) {
   const el = document.getElementById(id);
   if (!el) return;
-  
-  document.documentElement.style.scrollBehavior = 'auto';
-  el.scrollIntoView({ behavior: 'auto' });
-  
-  let ticks = 0;
-  let interval: ReturnType<typeof setInterval>;
-  
-  const cancelScroll = () => {
-    clearInterval(interval);
-    document.documentElement.style.scrollBehavior = '';
-    window.removeEventListener('wheel', cancelScroll);
-    window.removeEventListener('touchmove', cancelScroll);
-  };
-
-  window.addEventListener('wheel', cancelScroll, { passive: true });
-  window.addEventListener('touchmove', cancelScroll, { passive: true });
-
-  interval = setInterval(() => {
-    const target = document.getElementById(id);
-    if (target) {
-      const rect = target.getBoundingClientRect();
-      if (Math.abs(rect.top) > 5) {
-        window.scrollBy(0, rect.top);
-      }
-    }
-    ticks++;
-    if (ticks > 15) {
-      cancelScroll();
-    }
-  }, 100);
+  const headerOffset = 80;
+  const elementPosition = el.getBoundingClientRect().top;
+  const offsetPosition = elementPosition + window.scrollY - headerOffset;
+  window.scrollTo({ top: offsetPosition, behavior: "auto" });
 }
 
 export function HeroSection() {
@@ -190,6 +166,8 @@ export function HeroSection() {
     target: containerRef,
     offset: ["start start", "end start"]
   });
+  
+  const isInView = useInView(containerRef, { margin: "0px 0px -100px 0px" });
 
   const smoothProgress = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -233,6 +211,7 @@ export function HeroSection() {
             speed={1}
             amplitude={1}
             blend={isDark ? 0.5 : 0.8}
+            isPaused={!isInView}
           />
         </div>
 
@@ -315,7 +294,7 @@ export function HeroSection() {
               style={{ marginTop: "clamp(20px, 2.5vw, 36px)" }}
             >
               <SpecularButton
-                onClick={() => smoothScrollTo('projects')}
+                onClick={() => instantScrollTo('projects')}
                 className="text-xs font-bold tracking-widest uppercase shadow-xl"
                 baseColor={isDark ? "#ffffff" : "#1d1d1f"}
                 lineColor={isDark ? "#a1a1aa" : "#52525b"}
@@ -327,7 +306,7 @@ export function HeroSection() {
                 Projects
               </SpecularButton>
               <SpecularButton
-                onClick={() => smoothScrollTo('contact')}
+                onClick={() => instantScrollTo('contact')}
                 className="text-xs font-bold tracking-widest uppercase shadow-xl"
                 baseColor={isDark ? "#ffffff" : "#1d1d1f"}
                 lineColor={isDark ? "#a1a1aa" : "#52525b"}

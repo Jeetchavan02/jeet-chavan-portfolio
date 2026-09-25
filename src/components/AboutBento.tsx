@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import { SandboxCanvas } from "./SandboxCanvas";
 import { 
   BioCard, BioExpanded,
@@ -22,11 +22,22 @@ const sectionVariant = {
 
 export function AboutBento() {
   const [expandedId, setExpandedId] = useState<string | null>(null);
+  
+  const sectionRef = useRef<HTMLElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const isInView = useInView(sectionRef, { margin: "200px 0px 200px 0px" });
+
+  useEffect(() => {
+    if (isInView) {
+      videoRef.current?.play().catch(() => {});
+    } else {
+      videoRef.current?.pause();
+    }
+  }, [isInView]);
 
   const cards = [
     { id: 'status', component: <StatusCard />, expanded: <ContactExpanded />, classes: 'lg:col-start-1 lg:row-start-1' },
-    { id: 'quickfacts', component: <QuickFactsCard />, expanded: null, classes: 'lg:col-start-2 lg:row-start-1' },
-    { id: 'stack', component: <MatterStackCard />, expanded: <MatterStackExpanded />, classes: 'lg:col-start-3 lg:row-start-1' },
+    { id: 'stack', component: <MatterStackCard />, expanded: <MatterStackExpanded />, classes: 'lg:col-start-2 lg:col-span-2 lg:row-start-1' },
     { id: 'social', component: <SocialHubCard />, expanded: null, classes: 'lg:col-start-4 lg:row-start-1' },
     
     { id: 'bio', component: <BioCard />, expanded: null, classes: 'lg:col-start-2 lg:col-span-2 lg:row-start-2 lg:row-span-2 order-first lg:order-none row-span-2' },
@@ -41,9 +52,9 @@ export function AboutBento() {
   ];
 
   return (
-    <section id="about" className="relative px-4 py-24 bg-[#0A0A0F] overflow-hidden min-h-screen flex items-center">
+    <section ref={sectionRef} id="about" className="relative px-4 py-24 bg-[#0A0A0F] overflow-hidden min-h-screen flex items-center">
       <div className="absolute inset-0 z-0 opacity-75 pointer-events-none blur-xl" style={{ maskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)' }}>
-        <video autoPlay loop muted playsInline className="w-full h-full object-cover">
+        <video ref={videoRef} loop muted playsInline className="w-full h-full object-cover">
           <source src="/hero-bg.mp4" type="video/mp4" />
         </video>
       </div>

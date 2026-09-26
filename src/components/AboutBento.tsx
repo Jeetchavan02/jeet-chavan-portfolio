@@ -36,7 +36,7 @@ export function AboutBento() {
   }, [isInView]);
 
   const cards = [
-    { id: 'status', component: <StatusCard />, expanded: <ContactExpanded />, classes: 'lg:col-start-1 lg:row-start-1' },
+    { id: 'status', component: <StatusCard />, expanded: null, classes: 'lg:col-start-1 lg:row-start-1' },
     { id: 'stack', component: <MatterStackCard />, expanded: <MatterStackExpanded />, classes: 'lg:col-start-2 lg:col-span-2 lg:row-start-1' },
     { id: 'social', component: <SocialHubCard />, expanded: null, classes: 'lg:col-start-4 lg:row-start-1' },
     

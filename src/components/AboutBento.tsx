@@ -121,7 +121,7 @@ export function AboutBento() {
               >
                 ✕
               </button>
-              <div className="flex-1 w-full min-h-0 relative overflow-hidden">
+              <div className="flex-1 w-full min-h-0 relative overflow-y-auto">
                 {cards.find(c => c.id === expandedId)?.expanded}
               </div>
             </motion.div>

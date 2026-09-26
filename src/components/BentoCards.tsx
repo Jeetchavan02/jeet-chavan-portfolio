@@ -93,17 +93,17 @@ export function HeroExpanded() {
       <div className="relative z-10 max-w-5xl mx-auto w-full flex-1">
         <div className="flex flex-col md:flex-row gap-10 items-center mb-12 border-b border-white/10 pb-12">
           <div className="flex-1">
-            <h1 className="text-5xl lg:text-7xl font-black tracking-tighter mb-4 text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white/50 flex items-center gap-3">
+            <h1 className="text-4xl lg:text-6xl font-black tracking-tighter mb-4 text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white/50 flex items-center gap-3">
               ATLAS 
-              <svg className="w-10 h-10 lg:w-14 lg:h-14 text-white hover:rotate-12 transition-transform duration-300" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg className="w-8 h-8 lg:w-12 lg:h-12 text-white hover:rotate-12 transition-transform duration-300" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="12" cy="12" r="5" fill="currentColor" />
                 <ellipse cx="12" cy="12" rx="10" ry="3" transform="rotate(-20 12 12)" stroke="currentColor" strokeWidth="1.5" />
               </svg>
             </h1>
-            <p className="text-xl text-[#00e5ff] font-medium mb-6">
+            <p className="text-lg lg:text-xl text-[#00e5ff] font-medium mb-4">
               Breaking productivity barriers.
             </p>
-            <p className="text-lg text-white/70 leading-relaxed mb-8">
+            <p className="text-base lg:text-lg text-white/70 leading-relaxed mb-6">
               A state-of-the-art personal operating system that fuses health metrics, task management, and multimodal AI into a single, cohesive application. Built for absolute speed and privacy.
             </p>
             
@@ -123,7 +123,7 @@ export function HeroExpanded() {
             </div>
           </div>
           
-          <div className="w-full md:w-[500px] rounded-xl border border-white/10 overflow-hidden shrink-0 shadow-2xl relative">
+          <div className="w-full md:w-[420px] rounded-xl border border-white/10 overflow-hidden shrink-0 shadow-2xl relative">
              <img src="/atlas-screenshot.png" alt="Atlas OS Dashboard" className="w-full h-auto object-cover" />
           </div>
         </div>

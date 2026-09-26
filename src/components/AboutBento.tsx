@@ -48,7 +48,7 @@ export function AboutBento() {
     { id: 'github', component: <GithubCard />, expanded: null, classes: 'lg:col-start-4 lg:row-start-2' },
     { id: 'leadership', component: <QuoteCard />, expanded: null, classes: 'lg:col-start-4 lg:row-start-3' },
     
-    { id: 'sandbox', component: <SandboxCanvas />, expanded: <SandboxCanvas />, classes: 'lg:col-start-1 lg:col-span-4 lg:row-start-4' },
+    { id: 'sandbox', component: <SandboxCanvas />, expanded: null, classes: 'lg:col-start-1 lg:col-span-4 lg:row-start-4' },
   ];
 
   return (

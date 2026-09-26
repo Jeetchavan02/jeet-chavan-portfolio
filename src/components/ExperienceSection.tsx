@@ -54,7 +54,7 @@ const experiences: ExperienceItem[] = [
     id: "5",
     role: "Class Representative",
     company: "Fr.CRCE",
-    date: "Aug 2024 - Present",
+    date: "Sep 2024 - Present",
     description: [
       "Liaison between faculty and a class of 70+ students for 3 years, managing communication, grievances, and administrative coordination."
     ],

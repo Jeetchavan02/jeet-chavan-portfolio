@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from 'react';
+import { useTheme } from '../lib/ThemeContext';
 
 interface OrbitCardProps {
   children: React.ReactNode;
@@ -86,6 +87,9 @@ export function OrbitCard({ children, className = '', style = {}, onClick }: Orb
     };
   }, []);
 
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
+
   return (
     <div 
       ref={cardRef} 
@@ -93,10 +97,10 @@ export function OrbitCard({ children, className = '', style = {}, onClick }: Orb
       className={`orbit-module relative overflow-hidden rounded-[32px] will-change-transform ${onClick ? 'cursor-pointer' : ''} ${className}`}
       style={{
         ...style,
-        background: "rgba(255, 255, 255, 0.05)",
-        border: "1px solid rgba(255, 255, 255, 0.05)",
+        background: isDark ? "rgba(255, 255, 255, 0.05)" : "rgba(0, 0, 0, 0.03)",
+        border: isDark ? "1px solid rgba(255, 255, 255, 0.05)" : "1px solid rgba(0, 0, 0, 0.05)",
         backdropFilter: "blur(30px)",
-        boxShadow: "0 10px 40px rgba(0, 0, 0, 0.3)",
+        boxShadow: isDark ? "0 10px 40px rgba(0, 0, 0, 0.3)" : "0 10px 40px rgba(0, 0, 0, 0.1)",
       }}
     >
       <div className="relative z-10 h-full w-full">{children}</div>

@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from 'react';
+import { useTheme } from '../lib/ThemeContext';
 
 interface Particle {
   x: number;
@@ -12,6 +13,8 @@ interface Particle {
 }
 
 export function SandboxCanvas() {
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -189,7 +192,7 @@ export function SandboxCanvas() {
       }}
     >
       <div className="absolute top-4 left-4 z-10 pointer-events-none">
-        <p className="font-mono-brand text-xs text-white/50 tracking-widest uppercase">
+        <p className={`font-mono-brand text-xs uppercase tracking-widest ${isDark ? "text-white/50" : "text-black/50"}`}>
           Interactive Sandbox // Particle Simulation
         </p>
       </div>

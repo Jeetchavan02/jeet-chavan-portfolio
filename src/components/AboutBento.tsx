@@ -11,6 +11,7 @@ import {
   StatusCard, QuickFactsCard, GithubCard, QuoteCard,
   ContactExpanded
 } from "./BentoCards";
+import { useTheme } from "../lib/ThemeContext";
 
 const sectionVariant = {
   hidden: { opacity: 0, y: 40 },
@@ -21,6 +22,8 @@ const sectionVariant = {
 };
 
 export function AboutBento() {
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
   const [expandedId, setExpandedId] = useState<string | null>(null);
   
   const sectionRef = useRef<HTMLElement>(null);
@@ -52,13 +55,7 @@ export function AboutBento() {
   ];
 
   return (
-    <section ref={sectionRef} id="about" className="relative px-4 py-24 bg-[#0A0A0F] overflow-hidden min-h-screen flex items-center">
-      <div className="absolute inset-0 z-0 opacity-75 pointer-events-none blur-xl" style={{ maskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)' }}>
-        <video ref={videoRef} loop muted playsInline className="w-full h-full object-cover">
-          <source src="/hero-bg.mp4" type="video/mp4" />
-        </video>
-      </div>
-
+    <section ref={sectionRef} id="about" className={`relative px-4 py-24 overflow-hidden min-h-screen flex items-center transition-colors duration-700 ${isDark ? "bg-[#0A0A0F] text-white" : "bg-[#f5f5f7] text-[#1d1d1f]"}`}>
       <div className="relative z-10 mx-auto max-w-6xl w-full">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -67,8 +64,8 @@ export function AboutBento() {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="mb-10 text-center lg:text-left"
         >
-          <p className="font-mono-brand text-xs text-white/40 uppercase tracking-widest mb-2">01 — Explore</p>
-          <h2 className="text-4xl font-extrabold text-white">
+          <p className={`font-mono-brand text-xs uppercase tracking-widest mb-2 transition-colors ${isDark ? "text-white/40" : "text-black/40"}`}>01 — Explore</p>
+          <h2 className={`text-4xl font-extrabold transition-colors ${isDark ? "text-white" : "text-black"}`}>
             Welcome to <span className="text-[#7c6bff]">My World</span>.
           </h2>
         </motion.div>
@@ -101,7 +98,7 @@ export function AboutBento() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setExpandedId(null)}
-              className="absolute inset-0 bg-black/60 backdrop-blur-md"
+              className={`absolute inset-0 backdrop-blur-md transition-colors ${isDark ? "bg-black/60" : "bg-white/60"}`}
             />
             <motion.div
               layoutId={`card-${expandedId}`}
@@ -109,7 +106,7 @@ export function AboutBento() {
                 expandedId === 'sandbox' ? 'w-full h-full rounded-none' : 'w-full max-w-5xl h-auto max-h-[90vh]'
               }`}
               style={{
-                background: expandedId === 'sandbox' ? '#0A0A0F' : "rgba(255, 255, 255, 0.05)",
+                background: expandedId === 'sandbox' ? (isDark ? '#0A0A0F' : '#f5f5f7') : (isDark ? "rgba(255, 255, 255, 0.05)" : "rgba(0, 0, 0, 0.05)"),
                 backdropFilter: expandedId === 'sandbox' ? 'none' : "blur(40px)",
                 boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)",
                 border: "none",
@@ -117,7 +114,7 @@ export function AboutBento() {
             >
               <button
                 onClick={(e) => { e.stopPropagation(); setExpandedId(null); }}
-                className="absolute top-6 right-6 z-50 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors backdrop-blur-md"
+                className={`absolute top-6 right-6 z-50 w-10 h-10 rounded-full flex items-center justify-center transition-colors backdrop-blur-md ${isDark ? "bg-white/10 hover:bg-white/20 text-white" : "bg-black/10 hover:bg-black/20 text-black"}`}
               >
                 ✕
               </button>

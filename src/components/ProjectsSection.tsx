@@ -565,7 +565,7 @@ export function ProjectsSection() {
               className="mt-8 flex justify-start"
             >
               <a 
-                href="#"
+                href="https://github.com/SanikaLobo"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`group flex items-center gap-2 rounded-full px-8 py-3.5 text-sm font-semibold transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] ${

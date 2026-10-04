@@ -94,17 +94,17 @@ export function HeroExpanded() {
   const { theme } = useTheme();
   const isDark = theme === "dark";
   return (
-    <div className={`w-full h-full p-8 lg:p-12 pb-24 text-white overflow-y-auto bg-transparent flex flex-col relative`}>
+    <div className={`w-full h-full p-8 lg:p-12 pb-24 ${isDark ? "text-white" : "text-[#1d1d1f]"} overflow-y-auto bg-transparent flex flex-col relative`}>
       {/* Background Glow */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-[#7c6bff]/10 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#00e5ff]/10 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="relative z-10 max-w-5xl mx-auto w-full flex-1">
-        <div className={`flex flex-col md:flex-row gap-10 items-center mb-12 border-b border-white/10 pb-12`}>
+        <div className={`flex flex-col md:flex-row gap-10 items-center mb-12 border-b ${isDark ? "border-white/10" : "border-black/10"} pb-12`}>
           <div className="flex-1">
-            <h1 className="text-4xl lg:text-6xl font-black tracking-tighter mb-4 text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white/50 flex items-center gap-3">
+            <h1 className={`text-4xl lg:text-6xl font-black tracking-tighter mb-4 text-transparent bg-clip-text ${isDark ? "bg-gradient-to-r from-white via-white to-white/50" : "bg-gradient-to-r from-black via-black to-black/50"} flex items-center gap-3`}>
               ATLAS 
-              <svg className={`w-8 h-8 lg:w-12 lg:h-12 text-white hover:rotate-12 transition-transform duration-300`} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg className={`w-8 h-8 lg:w-12 lg:h-12 ${isDark ? "text-white" : "text-black"} hover:rotate-12 transition-transform duration-300`} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="12" cy="12" r="5" fill="currentColor" />
                 <ellipse cx="12" cy="12" rx="10" ry="3" transform="rotate(-20 12 12)" stroke="currentColor" strokeWidth="1.5" />
               </svg>
@@ -112,68 +112,68 @@ export function HeroExpanded() {
             <p className="text-lg lg:text-xl text-[#00e5ff] font-medium mb-4">
               Breaking productivity barriers.
             </p>
-            <p className={`text-base lg:text-lg text-white/70 leading-relaxed mb-6`}>
+            <p className={`text-base lg:text-lg ${isDark ? "text-white/70" : "text-black/70"} leading-relaxed mb-6`}>
               A state-of-the-art personal operating system that fuses health metrics, task management, and multimodal AI into a single, cohesive application. Built for absolute speed and privacy.
             </p>
             
             <div className="flex flex-wrap gap-3 mb-8">
               {['React', 'TypeScript', 'Tailwind', 'Node.js', 'MongoDB', 'Groq (Llama 3)'].map(tech => (
-                <span key={tech} className={`px-3 py-1.5 rounded-md bg-white/5 border border-white/10 text-xs font-mono text-white/60`}>
+                <span key={tech} className={`px-3 py-1.5 rounded-md ${isDark ? "bg-white/5 border-white/10 text-white/60" : "bg-black/5 border-black/10 text-black/60"} border text-xs font-mono`}>
                   {tech}
                 </span>
               ))}
             </div>
 
             <div className="flex gap-4">
-              <a href="https://github.com/Jeetchavan02/Atlas" target="_blank" rel="noreferrer" className={`inline-flex items-center gap-2 px-6 py-3 bg-white/5 hover:bg-white/10 border border-white/10 text-white font-medium rounded-xl transition-all hover:shadow-[0_0_20px_rgba(124,107,255,0.2)]`}>
+              <a href="https://github.com/Jeetchavan02/Atlas" target="_blank" rel="noreferrer" className={`inline-flex items-center gap-2 px-6 py-3 ${isDark ? "bg-white/5 hover:bg-white/10 border-white/10 text-white" : "bg-black/5 hover:bg-black/10 border-black/10 text-black"} border font-medium rounded-xl transition-all hover:shadow-[0_0_20px_rgba(124,107,255,0.2)]`}>
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" /></svg>
                 View on GitHub
               </a>
             </div>
           </div>
           
-          <div className={`w-full md:w-[420px] rounded-xl border border-white/10 overflow-hidden shrink-0 shadow-2xl relative`}>
+          <div className={`w-full md:w-[420px] rounded-xl border ${isDark ? "border-white/10" : "border-black/10"} overflow-hidden shrink-0 shadow-2xl relative`}>
              <img src="/atlas-screenshot.png" alt="Atlas OS Dashboard" className="w-full h-auto object-cover" />
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className={`bg-white/[0.02] border border-white/[0.05] p-6 rounded-2xl hover:bg-white/[0.04] transition-colors`}>
+          <div className={`${isDark ? "bg-white/[0.02] border-white/[0.05] hover:bg-white/[0.04]" : "bg-black/[0.02] border-black/[0.05] hover:bg-black/[0.04]"} border p-6 rounded-2xl transition-colors`}>
             <h3 className="text-lg font-bold mb-3 flex items-center gap-3">
               <span className="w-1.5 h-1.5 rounded-full bg-[#00e5ff] shadow-[0_0_8px_#00e5ff]" />
               Intelligent AI Assistant
             </h3>
-            <p className={`text-white/60 text-sm leading-relaxed`}>
+            <p className={`${isDark ? "text-white/60" : "text-black/60"} text-sm leading-relaxed`}>
               Context-aware conversations with a sophisticated persona using ultra-fast LLM inference. It dynamically reads live databases with a conversational voice UI and interruption support.
             </p>
           </div>
 
-          <div className={`bg-white/[0.02] border border-white/[0.05] p-6 rounded-2xl hover:bg-white/[0.04] transition-colors`}>
+          <div className={`${isDark ? "bg-white/[0.02] border-white/[0.05] hover:bg-white/[0.04]" : "bg-black/[0.02] border-black/[0.05] hover:bg-black/[0.04]"} border p-6 rounded-2xl transition-colors`}>
             <h3 className="text-lg font-bold mb-3 flex items-center gap-3">
               <span className="w-1.5 h-1.5 rounded-full bg-[#7c6bff] shadow-[0_0_8px_#7c6bff]" />
               Local Agent & macOS Control
             </h3>
-            <p className={`text-white/60 text-sm leading-relaxed`}>
+            <p className={`${isDark ? "text-white/60" : "text-black/60"} text-sm leading-relaxed`}>
               Autonomous CLI and robust ActionRegistry. Safely automates macOS to focus apps, type text, and press keys via AI-generated Action Plans.
             </p>
           </div>
 
-          <div className={`bg-white/[0.02] border border-white/[0.05] p-6 rounded-2xl hover:bg-white/[0.04] transition-colors`}>
+          <div className={`${isDark ? "bg-white/[0.02] border-white/[0.05] hover:bg-white/[0.04]" : "bg-black/[0.02] border-black/[0.05] hover:bg-black/[0.04]"} border p-6 rounded-2xl transition-colors`}>
             <h3 className="text-lg font-bold mb-3 flex items-center gap-3">
               <span className="w-1.5 h-1.5 rounded-full bg-[#0284c7] shadow-[0_0_8px_#0284c7]" />
               Context Engine
             </h3>
-            <p className={`text-white/60 text-sm leading-relaxed`}>
+            <p className={`${isDark ? "text-white/60" : "text-black/60"} text-sm leading-relaxed`}>
               Automatically fetches real-time data and facts. Intelligently routes intent to inject only relevant health, task, or calendar data without blowing up token limits.
             </p>
           </div>
 
-          <div className={`bg-white/[0.02] border border-white/[0.05] p-6 rounded-2xl hover:bg-white/[0.04] transition-colors`}>
+          <div className={`${isDark ? "bg-white/[0.02] border-white/[0.05] hover:bg-white/[0.04]" : "bg-black/[0.02] border-black/[0.05] hover:bg-black/[0.04]"} border p-6 rounded-2xl transition-colors`}>
             <h3 className="text-lg font-bold mb-3 flex items-center gap-3">
               <span className="w-1.5 h-1.5 rounded-full bg-pink-500 shadow-[0_0_8px_#ec4899]" />
               Health & Productivity
             </h3>
-            <p className={`text-white/60 text-sm leading-relaxed`}>
+            <p className={`${isDark ? "text-white/60" : "text-black/60"} text-sm leading-relaxed`}>
               Total integration of physical metrics (sleep, HRV) and gym sessions, fused with real-time task management and advanced habit streaks.
             </p>
           </div>

@@ -106,7 +106,9 @@ export function AboutBento() {
                 expandedId === 'sandbox' ? 'w-full h-full rounded-none' : 'w-full max-w-5xl h-auto max-h-[90vh]'
               }`}
               style={{
-                background: expandedId === 'sandbox' ? (isDark ? '#0A0A0F' : '#f5f5f7') : (isDark ? "rgba(255, 255, 255, 0.05)" : "rgba(0, 0, 0, 0.05)"),
+                background: expandedId === 'sandbox' ? (isDark ? '#0A0A0F' : '#f5f5f7') : 
+                            expandedId === 'hero' ? 'rgba(10, 10, 15, 0.85)' : 
+                            (isDark ? "rgba(255, 255, 255, 0.05)" : "rgba(0, 0, 0, 0.05)"),
                 backdropFilter: expandedId === 'sandbox' ? 'none' : "blur(40px)",
                 boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)",
                 border: "none",

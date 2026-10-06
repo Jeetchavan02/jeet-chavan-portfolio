@@ -91,8 +91,8 @@ export function HeroCard() {
 }
 
 export function HeroExpanded() {
-  const { theme } = useTheme();
-  const isDark = theme === "dark";
+  // Force dark mode for this specific component to match the dark aesthetic of Atlas OS
+  const isDark = true;
   return (
     <div className={`w-full h-full p-8 lg:p-12 pb-24 ${isDark ? "text-white" : "text-[#1d1d1f]"} overflow-y-auto bg-transparent flex flex-col relative`}>
       {/* Background Glow */}

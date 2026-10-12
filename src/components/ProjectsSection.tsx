@@ -22,8 +22,8 @@ const projects: ProjectData[] = [
   {
     id: '2',
     title: 'Handsfree',
-    tech: ['MediaPipe', 'LiveKit WebRTC', 'Gemini AI', 'Chrome MV3'],
-    desc: 'AI-powered multimodal Chrome assistant enabling hands-free web browsing via on-device MediaPipe 60 FPS vision tracking, real-time LiveKit WebRTC voice streaming, and risk-governed Gemini browser automation.',
+    tech: ['MediaPipe', 'LiveKit WebRTC', 'Multilingual Voice', 'Chrome MV3'],
+    desc: 'Multimodal assistive Chrome extension enabling hands-free web browsing via 60 FPS on-device vision—pairing Kalman-smoothed head tracking and gesture recognition with low-latency multilingual voice control (English, Hindi, Marathi) and autonomous DOM navigation.',
     image: '/projects/handsfree-light.png',
     imageDark: '/projects/handsfree-dark.png',
     link: 'https://github.com/How2Invade/MacandCode_college_round'
@@ -53,7 +53,7 @@ export function ProjectsSection() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const cssContainerRef = useRef<HTMLDivElement>(null);
   const [portalNode, setPortalNode] = useState<HTMLElement | null>(null);
-  const [activeProject, setActiveProject] = useState<ProjectData | null>(projects[0]);
+  const [activeProject, setActiveProject] = useState<ProjectData | null>(projects[0] ?? null);
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
@@ -61,7 +61,8 @@ export function ProjectsSection() {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const index = parseInt(entry.target.getAttribute('data-index') || '0', 10);
-          setActiveProject(projects[index]);
+          const selected = projects[index];
+          if (selected) setActiveProject(selected);
         }
       });
     }, { rootMargin: '-40% 0px -40% 0px' });
@@ -114,7 +115,8 @@ export function ProjectsSection() {
     const controlParams = {
         openingProgress: 0
     }
-    const screenSize = [29.4, 20];
+    const SCREEN_WIDTH = 29.4;
+    const SCREEN_HEIGHT = 20;
 
     // =======================================================
     // Start the app
@@ -134,7 +136,7 @@ export function ProjectsSection() {
             createTimelines();
             
             const observer = new IntersectionObserver((entries) => {
-                if (entries[0].isIntersecting) {
+                if (entries[0]?.isIntersecting) {
                     mainTl.restart();
                 } else {
                     mainTl.pause(0);
@@ -215,7 +217,9 @@ export function ProjectsSection() {
         screenImageTexture = textLoader.load("/purple-wallpaper.jpg", tex => {
             tex.flipY = false;
             tex.wrapS = THREE.RepeatWrapping;
-            tex.repeat.y = tex.image.width / tex.image.height / screenSize[0] * screenSize[1];
+            if (tex.image) {
+                tex.repeat.y = (tex.image.width / tex.image.height / SCREEN_WIDTH) * SCREEN_HEIGHT;
+            }
         })
 
         screenMaterial = new THREE.MeshBasicMaterial({
@@ -294,14 +298,14 @@ export function ProjectsSection() {
 
     function addScreen() {
         screenMesh = new THREE.Mesh(
-            new THREE.PlaneGeometry(screenSize[0], screenSize[1]),
+            new THREE.PlaneGeometry(SCREEN_WIDTH, SCREEN_HEIGHT),
             screenMaterial
         )
         screenMesh.position.set(0, 10.5, -.11);
         screenMesh.rotation.set(Math.PI, 0, 0);
         lidGroup.add(screenMesh);
 
-        screenLight = new THREE.RectAreaLight(0xffffff, 0, screenSize[0], screenSize[1]);
+        screenLight = new THREE.RectAreaLight(0xffffff, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
         screenLight.position.set(0, 10.5, 0);
         screenLight.rotation.set(Math.PI, 0, 0);
         lidGroup.add(screenLight);
@@ -487,7 +491,7 @@ export function ProjectsSection() {
               return (
                 <div 
                   key={p.id}
-                  ref={el => itemRefs.current[idx] = el}
+                  ref={el => { itemRefs.current[idx] = el; }}
                   data-index={idx}
                   onClick={() => {
                     setActiveProject(p);

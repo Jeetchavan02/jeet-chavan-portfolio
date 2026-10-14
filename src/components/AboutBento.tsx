@@ -1,15 +1,13 @@
-import React, { useState, useRef, useEffect } from "react";
-import { motion, AnimatePresence, useInView } from "framer-motion";
+import React, { useState, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { SandboxCanvas } from "./SandboxCanvas";
 import { 
-  BioCard, BioExpanded,
+  BioCard,
   HeroCard, HeroExpanded,
   MatterStackCard, MatterStackExpanded,
-  MomentumCard, MomentumExpanded,
-  SocialHubCard, SocialHubExpanded,
+  SocialHubCard,
   SpotifyEqualizerCard, SpotifyExpanded,
-  StatusCard, QuickFactsCard, GithubCard, QuoteCard,
-  ContactExpanded
+  StatusCard, GithubCard, QuoteCard
 } from "./BentoCards";
 import { useTheme } from "../lib/ThemeContext";
 
@@ -27,16 +25,6 @@ export function AboutBento() {
   const [expandedId, setExpandedId] = useState<string | null>(null);
   
   const sectionRef = useRef<HTMLElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const isInView = useInView(sectionRef, { margin: "200px 0px 200px 0px" });
-
-  useEffect(() => {
-    if (isInView) {
-      videoRef.current?.play().catch(() => {});
-    } else {
-      videoRef.current?.pause();
-    }
-  }, [isInView]);
 
   const cards = [
     { id: 'status', component: <StatusCard />, expanded: null, classes: 'lg:col-start-1 lg:row-start-1' },

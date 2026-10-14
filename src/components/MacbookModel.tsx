@@ -8,7 +8,7 @@ type GLTFResult = GLTF & {
   materials: { [key: string]: THREE.MeshStandardMaterial }
 }
 
-export function MacbookModel({ htmlContent, ...props }: JSX.IntrinsicElements['group'] & { htmlContent?: React.ReactNode }) {
+export function MacbookModel({ htmlContent, ...props }: React.ComponentProps<'group'> & { htmlContent?: React.ReactNode }) {
   const { nodes, materials } = useGLTF('/macbookpro.glb') as any
 
   // Smooth face gradients across all meshes automatically

@@ -128,7 +128,7 @@ function StaggeredHeading({ text, className, style, play }: { text: string, clas
   return (
     <motion.h1
       className={`flex flex-wrap justify-start ${className}`}
-      style={style}
+      {...(style ? { style: style as any } : {})}
       variants={letterContainer}
       initial="hidden"
       animate={play ? "visible" : "hidden"}

@@ -224,7 +224,7 @@ export function MatterStackExpanded() {
   const handlePegClick = (e: React.MouseEvent, pegIndex: number) => {
     e.stopPropagation();
     if (selectedPeg === null) {
-      if (pegs[pegIndex].length > 0) setSelectedPeg(pegIndex);
+      if ((pegs[pegIndex]?.length ?? 0) > 0) setSelectedPeg(pegIndex);
     } else {
       if (selectedPeg === pegIndex) {
         setSelectedPeg(null);
@@ -232,9 +232,13 @@ export function MatterStackExpanded() {
       }
       const sourcePeg = pegs[selectedPeg];
       const targetPeg = pegs[pegIndex];
+      if (!sourcePeg || !targetPeg || sourcePeg.length === 0) {
+        setSelectedPeg(null);
+        return;
+      }
       const disk = sourcePeg[sourcePeg.length - 1];
-      const targetTop = targetPeg.length > 0 ? targetPeg[targetPeg.length - 1] : 999;
-      if (disk < targetTop) {
+      const targetTop = targetPeg.length > 0 ? (targetPeg[targetPeg.length - 1] ?? 999) : 999;
+      if (disk !== undefined && disk < targetTop) {
         const newPegs = [...pegs];
         newPegs[selectedPeg] = sourcePeg.slice(0, -1);
         newPegs[pegIndex] = [...targetPeg, disk];
@@ -277,8 +281,8 @@ export function MatterStackExpanded() {
 
             {/* Shield Disks */}
             <div className="relative z-10 flex flex-col-reverse items-center w-full pb-0 gap-1.5">
-              {pegs[pegIndex].map((diskId, idx) => {
-                const isSelected = selectedPeg === pegIndex && idx === pegs[pegIndex].length - 1;
+              {(pegs[pegIndex] || []).map((diskId, idx) => {
+                const isSelected = selectedPeg === pegIndex && idx === (pegs[pegIndex]?.length ?? 0) - 1;
                 return (
                   <motion.div 
                     key={diskId}

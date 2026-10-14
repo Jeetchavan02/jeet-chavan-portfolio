@@ -32,8 +32,8 @@ function GeometricStructure({ scrollYProgress }: { scrollYProgress: MotionValue<
       <Float speed={2} rotationIntensity={1.5} floatIntensity={2}>
         <PresentationControls 
           global 
-          config={{ mass: 2, tension: 500 }} 
-          snap={{ mass: 4, tension: 150 }} 
+          snap
+          damping={0.1}
           rotation={[0.13, 0.1, 0]} 
           polar={[-Math.PI / 3, Math.PI / 3]} 
           azimuth={[-Math.PI / 1.4, Math.PI / 2]}

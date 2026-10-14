@@ -214,16 +214,9 @@ export function ProjectsSection() {
 
     function createMaterials() {
         const textLoader = new THREE.TextureLoader();
-        screenImageTexture = textLoader.load("/purple-wallpaper.jpg", tex => {
-            tex.flipY = false;
-            tex.wrapS = THREE.RepeatWrapping;
-            if (tex.image) {
-                tex.repeat.y = (tex.image.width / tex.image.height / SCREEN_WIDTH) * SCREEN_HEIGHT;
-            }
-        })
 
         screenMaterial = new THREE.MeshBasicMaterial({
-            map: screenImageTexture,
+            color: 0x0a0a0f,
             transparent: true,
             opacity: 0,
             side: THREE.BackSide

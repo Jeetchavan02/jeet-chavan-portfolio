@@ -74,6 +74,7 @@ export function SandboxCanvas() {
       
       for (let i = 0; i < particlesArray.length; i++) {
         const p = particlesArray[i];
+        if (!p) continue;
         
         // Slowly drift base positions
         p.baseX += p.vx;
@@ -119,6 +120,7 @@ export function SandboxCanvas() {
         // Connect particles for constellation effect
         for (let j = i; j < particlesArray.length; j++) {
           const p2 = particlesArray[j];
+          if (!p2) continue;
           const dx = p.x - p2.x;
           const dy = p.y - p2.y;
           const distSq = dx * dx + dy * dy;

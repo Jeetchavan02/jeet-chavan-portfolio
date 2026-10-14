@@ -109,12 +109,21 @@ void main() {
 }
 `;
 
-export default function Aurora(props) {
+interface AuroraProps {
+  colorStops?: string[];
+  amplitude?: number;
+  blend?: number;
+  time?: number;
+  speed?: number;
+  isPaused?: boolean;
+}
+
+export default function Aurora(props: AuroraProps) {
   const { colorStops = ['#5227FF', '#7cff67', '#5227FF'], amplitude = 1.0, blend = 0.5 } = props;
   const propsRef = useRef(props);
   propsRef.current = props;
 
-  const ctnDom = useRef(null);
+  const ctnDom = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctn = ctnDom.current;
@@ -131,25 +140,26 @@ export default function Aurora(props) {
     gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
     gl.canvas.style.backgroundColor = 'transparent';
 
-    let program;
+    let program: any;
+    let uniforms: Record<string, { value: any }>;
 
     function resize() {
       if (!ctn) return;
       const width = ctn.offsetWidth;
       const height = ctn.offsetHeight;
       renderer.setSize(width, height);
-      if (program) {
-        program.uniforms.uResolution.value = [width, height];
+      if (uniforms && uniforms['uResolution']) {
+        uniforms['uResolution'].value = [width, height];
       }
     }
     window.addEventListener('resize', resize);
 
     const geometry = new Triangle(gl);
-    if (geometry.attributes.uv) {
-      delete geometry.attributes.uv;
+    if ((geometry.attributes as any).uv) {
+      delete (geometry.attributes as any).uv;
     }
 
-    const colorStopsArray = colorStops.map(hex => {
+    const colorStopsArray = colorStops.map((hex: string) => {
       const c = new Color(hex);
       return [c.r, c.g, c.b];
     });
@@ -165,20 +175,21 @@ export default function Aurora(props) {
         uBlend: { value: blend }
       }
     });
+    uniforms = program.uniforms as Record<string, { value: any }>;
 
     const mesh = new Mesh(gl, { geometry, program });
     ctn.appendChild(gl.canvas);
 
     let animateId = 0;
-    const update = t => {
+    const update = (t: number) => {
       animateId = requestAnimationFrame(update);
       if (propsRef.current.isPaused) return;
       const { time = t * 0.01, speed = 1.0 } = propsRef.current;
-      program.uniforms.uTime.value = time * speed * 0.1;
-      program.uniforms.uAmplitude.value = propsRef.current.amplitude ?? 1.0;
-      program.uniforms.uBlend.value = propsRef.current.blend ?? blend;
+      uniforms['uTime']!.value = time * speed * 0.1;
+      uniforms['uAmplitude']!.value = propsRef.current.amplitude ?? 1.0;
+      uniforms['uBlend']!.value = propsRef.current.blend ?? blend;
       const stops = propsRef.current.colorStops ?? colorStops;
-      program.uniforms.uColorStops.value = stops.map(hex => {
+      uniforms['uColorStops']!.value = stops.map((hex: string) => {
         const c = new Color(hex);
         return [c.r, c.g, c.b];
       });
